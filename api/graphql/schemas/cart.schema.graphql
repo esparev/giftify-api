@@ -1,0 +1,34 @@
+scalar UUID
+scalar DateTime
+
+type Query {
+  cart(id: UUID!): Cart
+  carts: [Cart!]!
+}
+
+type Mutation {
+  createCart(data: CreateCart!): Cart
+  updateCart(id: UUID!, data: UpdateCart!): Cart
+  deleteCart(id: UUID!): UUID
+}
+
+type Cart {
+  id: UUID!
+  quantity: Int!
+  total: Float!
+  createdAt: DateTime!
+  user: User!
+  gifts: [Gift!]!
+}
+
+input CreateCart {
+  id: UUID!
+  quantity: Int
+  total: Float!
+}
+
+input UpdateCart {
+  quantity: Int
+  total: Float
+  userId: UUID
+}

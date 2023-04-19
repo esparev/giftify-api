@@ -1,0 +1,36 @@
+scalar UUID
+scalar DateTime
+
+type Query {
+  order(id: UUID!): Order
+  orders: [Order!]!
+}
+
+type Mutation {
+  createOrder(data: CreateOrder!): Order
+  updateOrder(id: UUID!, data: UpdateOrder!): Order
+  deleteOrder(id: UUID!): UUID
+}
+
+type Order {
+  id: UUID!
+  total: Float!
+  status: String!
+  createdAt: DateTime!
+  user: User!
+  gifts: [Gift!]!
+  address: Address!
+  paymentMethod: PaymentMethod!
+}
+
+input CreateOrder {
+  id: UUID!
+  total: Float!
+  status: String!
+  userId: UUID!
+  paymentMethodId: UUID!
+}
+
+input UpdateOrder {
+  status: String
+}

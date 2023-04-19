@@ -1,0 +1,46 @@
+scalar UUID
+scalar DateTime
+
+type Query {
+  address(id: UUID!): Address
+  addresses: [Address!]!
+}
+
+type Mutation {
+  createAddress(data: CreateAddress!): Address
+  updateAddress(id: UUID!, data: UpdateAddress!): Address
+  deleteAddress(id: UUID!): UUID
+}
+
+type Address {
+  id: UUID!
+  streetName: String!
+  streetNumber: String!
+  postalCode: String!
+  locality: String!
+  area: Int!
+  country: Int!
+  createdAt: DateTime!
+  user: User!
+  orders: [Order!]!
+}
+
+input CreateAddress {
+  id: UUID!
+  streetName: String!
+  streetNumber: String!
+  postalCode: String!
+  locality: String!
+  area: Int!
+  country: Int!
+  userId: UUID!
+}
+
+input UpdatePaymentMethod {
+  streetName: String
+  streetNumber: String
+  postalCode: String
+  locality: String
+  area: Int
+  country: Int
+}

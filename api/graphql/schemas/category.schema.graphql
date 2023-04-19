@@ -1,0 +1,32 @@
+scalar UUID
+scalar DateTime
+
+type Query {
+  category(id: UUID!): Category
+  categories: [Category!]!
+}
+
+type Mutation {
+  createCategory(data: CreateCategory!): Category
+  updateCategory(id: UUID!, data: UpdateCategory!): Category
+  deleteCategory(id: UUID!): UUID
+}
+
+type Category {
+  id: UUID!
+  slug: String!
+  name: String!
+  createdAt: DateTime!
+  gifts: [Gift!]!
+}
+
+input CreateCategory {
+  id: UUID!
+  slug: String!
+  name: String!
+}
+
+input UpdateCategory {
+  slug: String
+  name: String
+}

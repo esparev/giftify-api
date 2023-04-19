@@ -1,0 +1,46 @@
+scalar URL
+scalar UUID
+scalar DateTime
+
+type Query {
+  product(id: UUID!): Product
+  products: [Product!]!
+}
+
+type Mutation {
+  createProduct(data: CreateProduct!): Product
+  updateProduct(id: UUID!, data: UpdateProduct!): Product
+  deleteProduct(id: UUID!): UUID
+}
+
+type Product {
+  id: UUID!
+  name: String!
+  description: String!
+  price: Float!
+  image: URL!
+  rating: Int!
+  quantity: Int!
+  createdAt: DateTime!
+  category: Category!
+}
+
+input CreateProduct {
+  id: UUID!
+  name: String!
+  description: String!
+  price: Float!
+  image: URL!
+  rating: Int
+  quantity: Int!
+  categoryId: UUID!
+}
+
+input UpdateProduct {
+  name: String
+  description: String
+  price: Float
+  image: URL
+  rating: Int
+  quantity: Int
+}
