@@ -31,7 +31,7 @@ class GiftService {
 	 * @returns {Array} Array with all gifts
 	 */
 	async find() {
-		const gifts = await models.Gift.findAll();
+		const gifts = await models.Gift.findAll({ include: ['category'] });
 		return gifts;
 	}
 
@@ -42,7 +42,7 @@ class GiftService {
 	 */
 	async findOne(id) {
 		const gift = await models.Gift.findByPk(id, {
-			include: ['category', 'orders', carts],
+			include: ['category', 'orders', 'carts'],
 		});
 		if (!gift) {
 			throw boom.notFound('Gift not found');
