@@ -13,14 +13,14 @@ const { UserSchema, USER_TABLE } = require('../models/user.model');
 module.exports = {
 	async up(queryInterface, Sequelize) {
     await queryInterface.createTable(USER_TABLE, UserSchema);
-    await queryInterface.createTable(CART_TABLE, CartSchema);
-    await queryInterface.createTable(CATEGORY_TABLE, CategorySchema);
-    await queryInterface.createTable(GIFT_TABLE, GiftSchema);
-    await queryInterface.createTable(ADDRESS_TABLE, AddressSchema);
-    await queryInterface.createTable(PAYMENT_METHOD_TABLE, PaymentMethodSchema);
-    await queryInterface.createTable(ORDER_TABLE, OrderSchema);
-    await queryInterface.createTable(CART_ITEM_TABLE, CartItemSchema);
-    await queryInterface.createTable(ORDER_ITEM_TABLE, OrderItemSchema);
+		await queryInterface.createTable(CART_TABLE, CartSchema);
+		await queryInterface.createTable(CATEGORY_TABLE, CategorySchema);
+		await queryInterface.createTable(GIFT_TABLE, GiftSchema);
+		await queryInterface.createTable(ADDRESS_TABLE, AddressSchema);
+		await queryInterface.createTable(PAYMENT_METHOD_TABLE, PaymentMethodSchema);
+		await queryInterface.createTable(ORDER_TABLE, OrderSchema);
+		await queryInterface.createTable(CART_ITEM_TABLE, CartItemSchema);
+		await queryInterface.createTable(ORDER_ITEM_TABLE, OrderItemSchema);
 	},
 
 	async down(queryInterface, Sequelize) {
@@ -33,6 +33,5 @@ module.exports = {
     await queryInterface.dropTable(GIFT_TABLE);
     await queryInterface.dropTable(USER_TABLE);
     await queryInterface.dropTable(CATEGORY_TABLE);
-
 	},
 };
