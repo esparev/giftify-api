@@ -3,17 +3,17 @@ scalar UUID
 scalar DateTime
 
 type Query {
-  product(id: UUID!): Product
-  products: [Product!]!
+  gift(id: UUID!): Gift
+  gifts: [Gift!]!
 }
 
 type Mutation {
-  createProduct(data: CreateProduct!): Product
-  updateProduct(id: UUID!, data: UpdateProduct!): Product
-  deleteProduct(id: UUID!): UUID
+  createGift(data: CreateGift!): Gift
+  updateGift(id: UUID!, data: UpdateGift!): Gift
+  deleteGift(id: UUID!): UUID
 }
 
-type Product {
+type Gift {
   id: UUID!
   name: String!
   description: String!
@@ -25,7 +25,7 @@ type Product {
   category: Category!
 }
 
-input CreateProduct {
+input CreateGift {
   id: UUID!
   name: String!
   description: String!
@@ -36,7 +36,7 @@ input CreateProduct {
   categoryId: UUID!
 }
 
-input UpdateProduct {
+input UpdateGift {
   name: String
   description: String
   price: Float

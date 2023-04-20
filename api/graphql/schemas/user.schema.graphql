@@ -4,14 +4,14 @@ scalar DateTime
 scalar EmailAddress
 
 type Query {
-  user(id: UUID!): User
+  user(username: String!): User
   users: [User!]!
 }
 
 type Mutation {
   createUser(data: CreateUser!): User
-  updateUser(id: UUID!, data: UpdateUser!): User
-  deleteUser(id: UUID!): UUID
+  updateUser(username: String!, data: UpdateUser!): User
+  deleteUser(username: String!): UUID
 }
 
 type User {
@@ -24,6 +24,7 @@ type User {
   role: String!
   avatar: URL!
   createdAt: DateTime!
+  addresses: [Address!]!
   paymentMethods: [PaymentMethod!]!
   orders: [Order!]!
   cart: Cart!

@@ -17,9 +17,10 @@ type Address {
   streetName: String!
   streetNumber: String!
   postalCode: String!
+  city: String!
+  area: String!
   locality: String!
-  area: Int!
-  country: Int!
+  country: String!
   createdAt: DateTime!
   user: User!
   orders: [Order!]!
@@ -30,17 +31,19 @@ input CreateAddress {
   streetName: String!
   streetNumber: String!
   postalCode: String!
+  city: String!
+  area: String!
   locality: String!
-  area: Int!
-  country: Int!
+  country: String!
   userId: UUID!
 }
 
-input UpdatePaymentMethod {
+input UpdateAddress {
   streetName: String
   streetNumber: String
   postalCode: String
+  city: String
+  area: String
   locality: String
-  area: Int
-  country: Int
+  country: String
 }
