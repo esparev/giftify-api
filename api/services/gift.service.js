@@ -1,3 +1,6 @@
+const boom = require('@hapi/boom');
+const { models } = require('../db/sequelize');
+
 /**
  * Gift Service class to manage the logic of the gifts
  *
@@ -23,51 +26,61 @@
  * ```
  */
 class GiftService {
-	constructor() {}
-
 	/**
 	 * Finds all gifts in the array of objects
 	 * @returns {Array} Array with all gifts
 	 */
-	async find() {}
+	async find() {
+		const gifts = await models.Gift.findAll();
+		return gifts;
+	}
 
 	/**
 	 * Finds the gift with the provided id
 	 * @param {id} id - id of the gift
 	 * @returns {Object} Object with the gift
 	 */
-	async findOne(id) {}
-
-	/**
-	 * Finds the gift with the provided slug
-	 * @param {string} slug - slug of the gift
-	 * @returns {Object} Object with the gift
-	 */
-	async findBySlug(slug) {}
+	async findOne(id) {
+		const gift = await models.Gift.findByPk(id, {
+			include: ['category', 'orders', carts],
+		});
+		if (!gift) {
+			throw boom.notFound('Gift not found');
+		}
+		return gift;
+	}
 
 	/**
 	 * Creates a gift with the provided data
 	 * @param {*} data - data of the gift
 	 * @returns {Object} Object with the gift created
 	 */
-	async create(data) {}
+	async create(data) {
+		const gift = await models.Gift.create(data);
+		return gift;
+	}
 
 	/**
 	 * Updates the gift with the provided id
 	 * @param {id} id - id of the gift
 	 * @param {*} changes - data of the gift
 	 * @returns {Object} Object with the gift updated
-	 * @throws {Error} Error if the gift is not found
 	 */
-	async update(id, changes) {}
+	async update(id, changes) {
+		const gift = await models.Gift.update(id, changes);
+		return gift;
+	}
 
 	/**
 	 * Deletes the gift with the provided id
 	 * @param {id} id - id of the gift
 	 * @returns {Object} Object with the gift deleted
-	 * @throws {Error} Error if the gift is not found
 	 */
-	async delete(id) {}
+	async delete(id) {
+		const gift = await this.findOne(id);
+		await gift.destroy();
+		return { id };
+	}
 }
 
 module.exports = GiftService;

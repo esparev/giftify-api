@@ -1,3 +1,6 @@
+const boom = require('@hapi/boom');
+const { models } = require('../db/sequelize');
+
 /**
  * User Service class to manage the logic of the users
  *
@@ -14,67 +17,106 @@
  * service.find();
  * // Finds the user with the provided id
  * service.findOne(id);
+ * // Finds the user with the provided username
+ * service.findByUsername(username);
+ * // Finds the user with the provided email
+ * service.findByEmail(email);
  * // Creates a user with the provided data
  * service.create(data);
- * // Updates the user with the provided id
- * service.update(id, changes);
- * // Deletes the user with the provided id
- * service.delete(id);
+ * // Updates the user with the provided username
+ * service.update(username, changes);
+ * // Deletes the user with the provided username
+ * service.delete(username);
  * ```
  */
 class UserService {
-	constructor() {}
-
 	/**
 	 * Finds all users in the array of objects
 	 * @returns {Array} Array with all users
 	 */
-	async find() {}
+	async find() {
+		const users = await models.User.findAll();
+		return users;
+	}
 
 	/**
 	 * Finds the user with the provided id
 	 * @param {id} id - id of the user
 	 * @returns {Object} Object with the user
 	 */
-	async findOne(id) {}
+	async findOne(id) {
+		const user = await models.User.findByPk(id, {
+			include: ['addresses', 'paymentMethods', 'orders', 'cart'],
+		});
+		if (!user) {
+			throw boom.notFound('User not found');
+		}
+		return user;
+	}
 
 	/**
-	 * Finds the user with the provided slug
-	 * @param {string} slug - slug of the user
+	 * Finds the user with the provided username
+	 * @param {string} username - username of the user
 	 * @returns {Object} Object with the user
 	 */
-	async findBySlug(slug) {}
+	async findByUsername(username) {
+		const user = await models.User.findOne({
+			where: { username },
+			include: ['addresses', 'paymentMethods', 'orders', 'cart'],
+		});
+		if (!user) {
+			throw boom.notFound('User not found');
+		}
+		return user;
+	}
 
 	/**
 	 * Finds the user with the provided email
 	 * @param {string} email - email of the user
 	 * @returns {Object} Object with the user
 	 */
-	async findByEmail(email) {}
+	async findByEmail(email) {
+		const user = await models.User.findOne({
+			where: { email },
+			include: ['addresses', 'paymentMethods', 'orders', 'cart'],
+		});
+		if (!user) {
+			throw boom.notFound('User not found');
+		}
+		return user;
+	}
 
 	/**
 	 * Creates a user with the provided data
 	 * @param {*} data - data of the user
 	 * @returns {Object} Object with the user created
 	 */
-	async create(data) {}
+	async create(data) {
+		const user = await models.User.create(data);
+		return user;
+	}
 
 	/**
-	 * Updates the user with the provided id
-	 * @param {id} id - id of the user
+	 * Updates the user with the provided username
+	 * @param {username} username - username of the user
 	 * @param {*} changes - data of the user
 	 * @returns {Object} Object with the user updated
-	 * @throws {Error} Error if the user is not found
 	 */
-	async update(id, changes) {}
+	async update(username, changes) {
+		const user = await models.User.update(username, changes);
+		return user;
+	}
 
 	/**
-	 * Deletes the user with the provided id
-	 * @param {id} id - id of the user
+	 * Deletes the user with the provided username
+	 * @param {username} username - username of the user
 	 * @returns {Object} Object with the user deleted
-	 * @throws {Error} Error if the user is not found
 	 */
-	async delete(id) {}
+	async delete(username) {
+		const user = await this.findByUsername(username);
+		await user.destroy();
+		return { username };
+	}
 }
 
 module.exports = UserService;
