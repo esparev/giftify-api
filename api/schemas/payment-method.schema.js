@@ -4,6 +4,7 @@ const id = Joi.string().uuid({ version: 'uuidv4' });
 const alias = Joi.string().min(3).max(30);
 const cardholderName = Joi.string();
 const number = Joi.string();
+const last4 = Joi.string();
 const network = Joi.string();
 const expiryMonth = Joi.number().min(1).max(12);
 const expiryYear = Joi.number().min(2021);
@@ -24,6 +25,7 @@ const createPaymentMethodSchema = Joi.object({
 	alias: alias.required(),
 	cardholderName: cardholderName.required(),
 	number: number.required(),
+	last4: last4.required(),
 	network: network.required(),
 	expiryMonth: expiryMonth.required(),
 	expiryYear: expiryYear.required(),

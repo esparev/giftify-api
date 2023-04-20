@@ -17,6 +17,7 @@ type PaymentMethod {
   alias: String!
   cardholderName: String!
   number: String!
+  last4: String!
   network: String!
   expiryMonth: Int!
   expiryYear: Int!
@@ -30,6 +31,7 @@ input CreatePaymentMethod {
   alias: String!
   cardholderName: String!
   number: String!
+  last4: String!
   network: String!
   expiryMonth: Int!
   expiryYear: Int!
