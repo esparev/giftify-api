@@ -3,7 +3,6 @@ const {
 	ApolloServerPluginLandingPageGraphQLPlayground,
 } = require('apollo-server-core');
 const { loadFiles } = require('@graphql-tools/load-files');
-const { errorHandler } = require('graphql-middleware-error-handler');
 // const { buildContext } = require('graphql-passport');
 const resolvers = require('./resolvers/resolvers');
 
@@ -16,7 +15,6 @@ const useGraphQL = async (app) => {
 		typeDefs: await loadFiles('./api/graphql/**/*.graphql'),
 		resolvers,
 		playground: true,
-		middlewares: [errorHandler()],
 		// context: ({ req, res }) => buildContext({ req, res }),
 		plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
 	});

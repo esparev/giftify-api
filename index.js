@@ -1,5 +1,6 @@
 const express = require('express');
 const useGraphQL = require('./api/graphql');
+const bodyParser = require('body-parser');
 // const passport = require('passport');
 
 // require('./api/utils/auth');
@@ -19,6 +20,11 @@ app.get('/', (req, res) => {
 
 // app.use(passport.initialize());
 app.use(express.json());
+app.use(bodyParser.json({ limit: '5mb' }));
+
+app.post('/example', (req, res) => {
+	res.send(req.body);
+});
 
 (async () => {
 	await useGraphQL(app);
