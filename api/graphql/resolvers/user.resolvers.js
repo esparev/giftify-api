@@ -10,12 +10,12 @@ const users = () => {
 };
 
 /**
- * Finds the user with the provided id
- * @param {id} id - id of the user
+ * Finds the user with the provided username
+ * @param {username} username - username of the user
  * @returns {Object} Object with the user
  */
-const user = (_, { id }) => {
-	return service.findOne(id);
+const user = (_, { username }) => {
+	return service.findByUsername(username);
 };
 
 /**
