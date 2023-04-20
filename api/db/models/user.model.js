@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const modelOptions = require('../../../utils/modelOptions');
 
 const USER_TABLE = 'user';
-const option = modelOptions(false, 'User', USER_TABLE);
+const options = modelOptions(false, 'User', USER_TABLE);
 
 const UserSchema = {
 	id: {
@@ -61,11 +61,22 @@ const UserSchema = {
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
 };
 
 class User extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return {
+			sequelize,
+			timestamp: false,
+			modelName: 'User',
+			tableName: USER_TABLE,
+		};
 	}
 
 	static associate(models) {

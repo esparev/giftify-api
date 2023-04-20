@@ -40,11 +40,23 @@ const OrderItemSchema = {
 		onUpdate: 'CASCADE',
 		onDelete: 'SET NULL',
 	},
+	createdAt: {
+		allowNull: false,
+		field: 'created_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
 };
 
 class OrderItem extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 }
 

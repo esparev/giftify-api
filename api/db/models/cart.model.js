@@ -31,6 +31,12 @@ const CartSchema = {
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
 	userId: {
 		allowNull: false,
 		field: 'user_id',
@@ -46,7 +52,7 @@ const CartSchema = {
 
 class Cart extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate(models) {

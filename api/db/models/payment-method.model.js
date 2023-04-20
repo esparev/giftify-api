@@ -54,6 +54,12 @@ const PaymentMethodSchema = {
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
 	userId: {
 		allowNull: false,
 		field: 'user_id',
@@ -69,7 +75,7 @@ const PaymentMethodSchema = {
 
 class PaymentMethod extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate(models) {

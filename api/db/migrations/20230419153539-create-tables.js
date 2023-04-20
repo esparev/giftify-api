@@ -26,9 +26,9 @@ module.exports = {
 	async down(queryInterface, Sequelize) {
     await queryInterface.dropTable(ORDER_ITEM_TABLE);
     await queryInterface.dropTable(CART_ITEM_TABLE);
+    await queryInterface.dropTable(ORDER_TABLE);
     await queryInterface.dropTable(ADDRESS_TABLE);
     await queryInterface.dropTable(PAYMENT_METHOD_TABLE);
-    await queryInterface.dropTable(ORDER_TABLE);
     await queryInterface.dropTable(CART_TABLE);
     await queryInterface.dropTable(GIFT_TABLE);
     await queryInterface.dropTable(USER_TABLE);

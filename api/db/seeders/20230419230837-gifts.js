@@ -15,6 +15,7 @@ module.exports = {
 				rating: 4,
 				quantity: 10,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: 'a44b660f-5f02-4cc5-9ccf-d9a15a09e8ab',
 			},
 			{
@@ -27,6 +28,7 @@ module.exports = {
 				rating: 5,
 				quantity: 20,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: 'a44b660f-5f02-4cc5-9ccf-d9a15a09e8ab',
 			},
 			{
@@ -38,6 +40,7 @@ module.exports = {
 				rating: 3,
 				quantity: 5,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: '49f05c1d-67a7-4e36-8a06-94a0ac9d9245',
 			},
 			{
@@ -50,6 +53,7 @@ module.exports = {
 				rating: 4,
 				quantity: 8,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: 'a9a309cc-b9ed-4d51-a4b4-4dc10f31d60a',
 			},
 			{
@@ -62,6 +66,7 @@ module.exports = {
 				rating: 4,
 				quantity: 12,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: '49f05c1d-67a7-4e36-8a06-94a0ac9d9245',
 			},
 			{
@@ -74,6 +79,7 @@ module.exports = {
 				rating: 5,
 				quantity: 7,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: '06dfc59d-f9a6-4555-bfbe-5f5d5d5ec5f1',
 			},
 			{
@@ -86,6 +92,7 @@ module.exports = {
 				rating: 4,
 				quantity: 3,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: 'a9a309cc-b9ed-4d51-a4b4-4dc10f31d60a',
 			},
 			{
@@ -98,6 +105,7 @@ module.exports = {
 				rating: 4,
 				quantity: 6,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: '3f2dd7fa-dc23-46e8-9e67-9a7a4c6c4f4d',
 			},
 			{
@@ -110,6 +118,7 @@ module.exports = {
 				rating: 3,
 				quantity: 4,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: '954ddc5c-75fd-47e1-bded-5fc86b3fc031',
 			},
 			{
@@ -122,6 +131,7 @@ module.exports = {
 				rating: 5,
 				quantity: 20,
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 				category_id: '8d417a34-0dc6-40b7-90a8-80c0fc08aeb6',
 			},
 		]);

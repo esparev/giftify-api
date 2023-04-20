@@ -26,11 +26,17 @@ const CategorySchema = {
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
 };
 
 class Category extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate(models) {

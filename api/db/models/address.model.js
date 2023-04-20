@@ -27,6 +27,10 @@ const AddressSchema = {
 		field: 'postal_code',
 		type: DataTypes.STRING,
 	},
+	city: {
+		allowNull: false,
+		type: DataTypes.STRING,
+	},
 	area: {
 		allowNull: false,
 		type: DataTypes.STRING,
@@ -35,9 +39,19 @@ const AddressSchema = {
 		allowNull: false,
 		type: DataTypes.STRING,
 	},
+	country: {
+		allowNull: false,
+		type: DataTypes.STRING,
+	},
 	createdAt: {
 		allowNull: false,
 		field: 'created_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
@@ -56,7 +70,7 @@ const AddressSchema = {
 
 class Address extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate(models) {

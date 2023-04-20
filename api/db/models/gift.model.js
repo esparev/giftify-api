@@ -50,6 +50,12 @@ const GiftSchema = {
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
+	updatedAt: {
+		allowNull: false,
+		field: 'updated_at',
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
+	},
 	categoryId: {
 		allowNull: false,
 		field: 'category_id',
@@ -65,7 +71,7 @@ const GiftSchema = {
 
 class Gift extends Model {
 	static config(sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate(models) {

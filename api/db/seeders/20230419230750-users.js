@@ -14,6 +14,7 @@ module.exports = {
 				password: 'password123',
 				role: 'user',
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 			},
 			{
 				id: 'b8f2b127-7c17-44e1-9f71-8d2077357ef2',
@@ -24,6 +25,7 @@ module.exports = {
 				password: 'password123',
 				role: 'user',
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 			},
 			{
 				id: '22a7a1c3-8f3e-40f9-9df8-4130b2687aa3',
@@ -34,6 +36,7 @@ module.exports = {
 				password: 'password123',
 				role: 'user',
 				created_at: new Date().toISOString(),
+				updated_at: new Date().toISOString(),
 			},
 		]);
 	},
