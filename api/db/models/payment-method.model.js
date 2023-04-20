@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const modelOptions = require('../../../utils/modelOptions');
 
 const PAYMENT_METHOD_TABLE = 'payment_method';
@@ -10,7 +10,7 @@ const PaymentMethodSchema = {
 		primaryKey: true,
 		allowNull: false,
 		type: DataTypes.UUID,
-		defaultValue: Sequelize.UUIDV4,
+		defaultValue: DataTypes.UUIDV4,
 	},
 	alias: {
 		allowNull: false,
@@ -23,6 +23,11 @@ const PaymentMethodSchema = {
 	},
 	number: {
 		allowNull: false,
+		type: DataTypes.STRING,
+	},
+	last4: {
+		allowNull: false,
+		field: 'last_4',
 		type: DataTypes.STRING,
 	},
 	network: {
@@ -47,7 +52,7 @@ const PaymentMethodSchema = {
 		allowNull: false,
 		field: 'created_at',
 		type: DataTypes.DATE,
-		defaultValue: Sequelize.NOW,
+		defaultValue: DataTypes.NOW,
 	},
 	userId: {
 		allowNull: false,

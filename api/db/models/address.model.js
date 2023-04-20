@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const modelOptions = require('../../../utils/modelOptions');
 
 const ADDRESS_TABLE = 'address';
@@ -10,7 +10,7 @@ const AddressSchema = {
 		primaryKey: true,
 		allowNull: false,
 		type: DataTypes.UUID,
-		defaultValue: Sequelize.UUIDV4,
+		defaultValue: DataTypes.UUIDV4,
 	},
 	streetName: {
 		allowNull: false,
@@ -39,7 +39,7 @@ const AddressSchema = {
 		allowNull: false,
 		field: 'created_at',
 		type: DataTypes.DATE,
-		defaultValue: Sequelize.NOW,
+		defaultValue: DataTypes.NOW,
 	},
 	userId: {
 		allowNull: false,

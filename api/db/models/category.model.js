@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const modelOptions = require('../../../utils/modelOptions');
 
 const CATEGORY_TABLE = 'category';
@@ -9,7 +9,7 @@ const CategorySchema = {
 		primaryKey: true,
 		allowNull: false,
 		type: DataTypes.UUID,
-		defaultValue: Sequelize.UUIDV4,
+		defaultValue: DataTypes.UUIDV4,
 	},
 	slug: {
 		allowNull: false,
@@ -24,7 +24,7 @@ const CategorySchema = {
 		allowNull: false,
 		field: 'created_at',
 		type: DataTypes.DATE,
-		defaultValue: Sequelize.NOW,
+		defaultValue: DataTypes.NOW,
 	},
 };
 

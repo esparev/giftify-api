@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const modelOptions = require('../../../utils/modelOptions');
 
 const ORDER_ITEM_TABLE = 'order_has_item';
@@ -11,7 +11,7 @@ const OrderItemSchema = {
 		primaryKey: true,
 		allowNull: false,
 		type: DataTypes.UUID,
-		defaultValue: Sequelize.UUIDV4,
+		defaultValue: DataTypes.UUIDV4,
 	},
 	quantity: {
 		allowNull: false,

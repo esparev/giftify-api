@@ -11,7 +11,7 @@ const CartItemSchema = {
 		primaryKey: true,
 		allowNull: false,
 		type: DataTypes.UUID,
-		defaultValue: Sequelize.UUIDV4,
+		defaultValue: DataTypes.UUIDV4,
 	},
 	quantity: {
 		allowNull: false,

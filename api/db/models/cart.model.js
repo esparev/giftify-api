@@ -1,8 +1,7 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const modelOptions = require('../../../utils/modelOptions');
 
 const CART_TABLE = 'cart';
-const { STORE_TABLE } = require('./store.model');
 const { USER_TABLE } = require('./user.model');
 const options = modelOptions(false, 'Cart', CART_TABLE);
 
@@ -11,7 +10,7 @@ const CartSchema = {
 		primaryKey: true,
 		allowNull: false,
 		type: DataTypes.UUID,
-		defaultValue: Sequelize.UUIDV4,
+		defaultValue: DataTypes.UUIDV4,
 	},
 	quantity: {
 		allowNull: false,
@@ -30,7 +29,7 @@ const CartSchema = {
 		allowNull: false,
 		field: 'created_at',
 		type: DataTypes.DATE,
-		defaultValue: Sequelize.NOW,
+		defaultValue: DataTypes.NOW,
 	},
 	userId: {
 		allowNull: false,
