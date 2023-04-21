@@ -3,6 +3,7 @@ const useGraphQL = require('./api/graphql');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const passport = require('passport');
+const routerAuth = require('./auth');
 
 require('./auth');
 
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 	res.send("Esparev's API");
 });
 
+routerAuth(app);
 (async () => {
 	await useGraphQL(app);
 })();

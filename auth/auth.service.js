@@ -2,9 +2,9 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const boom = require('@hapi/boom');
-const UserService = require('./user.service');
+const UserService = require('../api/services/user.service');
 const service = new UserService();
-const { config } = require('../../config');
+const { config } = require('../config');
 
 /**
  * Auth Service class to manage the logic of the auth
