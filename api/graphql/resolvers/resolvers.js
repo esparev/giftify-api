@@ -1,3 +1,4 @@
+const { login } = require('./auth.resolvers');
 const { address, addresses, createAddress, updateAddress, deleteAddress } = require('./address.resolvers'); // prettier-ignore
 const { cart, carts, createCart, updateCart, deleteCart } = require('./cart.resolvers'); // prettier-ignore
 const { category, categories, createCategory, updateCategory, deleteCategory } = require('./category.resolvers'); // prettier-ignore
@@ -18,6 +19,7 @@ const resolvers = {
     user, users,
   },
 	Mutation: {
+    login,
     createAddress, updateAddress, deleteAddress,
     createCart, updateCart, deleteCart,
     createCategory, updateCategory, deleteCategory,

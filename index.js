@@ -1,9 +1,9 @@
 const express = require('express');
 const useGraphQL = require('./api/graphql');
 const bodyParser = require('body-parser');
-// const passport = require('passport');
+const passport = require('passport');
 
-// require('./api/utils/auth');
+require('./auth');
 
 const {
 	errorHandler,
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 	res.send("Esparev's API");
 });
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 app.use(express.json());
 app.use(bodyParser.json({ limit: '5mb' }));
 

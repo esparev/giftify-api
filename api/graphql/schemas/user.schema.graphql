@@ -31,14 +31,14 @@ type User {
 }
 
 input CreateUser {
-  id: UUID!
+  id: UUID
   username: String!
   firstName: String!
   lastName: String!
   email: EmailAddress!
   password: String!
-  role: String!
-  avatar: URL!
+  role: String
+  avatar: URL
 }
 
 input UpdateUser {

@@ -1,0 +1,11 @@
+scalar JWT
+scalar EmailAddress
+
+type Mutation {
+  login(email: EmailAddress!, password: String!): AuthPayload
+}
+
+type AuthPayload {
+  token: JWT!
+  user: User!
+}
