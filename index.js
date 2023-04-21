@@ -1,6 +1,7 @@
 const express = require('express');
 const useGraphQL = require('./api/graphql');
 const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
 const passport = require('passport');
 
 require('./auth');
@@ -14,16 +15,18 @@ const {
 const app = express();
 const port = process.env.PORT || 3003;
 
-app.get('/', (req, res) => {
-	res.send("Esparev's API");
+const limiter = rateLimit({
+	windowMs: 15 * 1000, // 15 seconds
+	max: 100, // limit each IP to 100 requests per windowMs
 });
 
+app.use(limiter);
 app.use(passport.initialize());
 app.use(express.json());
 app.use(bodyParser.json({ limit: '5mb' }));
 
-app.post('/example', (req, res) => {
-	res.send(req.body);
+app.get('/', (req, res) => {
+	res.send("Esparev's API");
 });
 
 (async () => {
