@@ -28,23 +28,23 @@ const createCategory = (_, { data }) => {
 };
 
 /**
- * Updates the category with the provided id
- * @param {id} id - id of the category
+ * Updates the category with the provided slug
+ * @param {slug} slug - slug of the category
  * @param {data} changes - data of the category
  * @returns {Object} Object with the category updated
  */
-const updateCategory = (_, { id, data }) => {
-	return service.update(id, data);
+const updateCategory = (_, { slug, data }) => {
+	return service.update(slug, data);
 };
 
 /**
- * Deletes the category with the provided id
- * @param {id} id - id of the category
+ * Deletes the category with the provided slug
+ * @param {slug} slug - slug of the category
  * @returns {Object} Object with the category deleted
  */
-const deleteCategory = async (_, { id }) => {
-	await service.delete(id);
-	return id;
+const deleteCategory = async (_, { slug }) => {
+	await service.delete(slug);
+	return slug;
 };
 
 module.exports = {

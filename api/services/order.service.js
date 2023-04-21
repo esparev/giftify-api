@@ -67,8 +67,9 @@ class OrderService {
 	 * @returns {Object} Object with the order updated
 	 */
 	async update(id, changes) {
-		const order = await models.Order.update(id, changes);
-		return order;
+		const order = await this.findOne(id);
+		const response = await order.update(changes);
+		return response;
 	}
 
 	/**

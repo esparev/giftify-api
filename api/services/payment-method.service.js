@@ -67,8 +67,9 @@ class PaymentMethodService {
 	 * @returns {Object} Object with the payment method updated
 	 */
 	async update(id, changes) {
-		const paymentMethod = await models.PaymentMethod.update(id, changes);
-		return paymentMethod;
+		const paymentMethod = await this.findOne(id);
+		const response = await paymentMethod.update(changes);
+		return response;
 	}
 
 	/**

@@ -8,8 +8,8 @@ type Query {
 
 type Mutation {
   createCategory(data: CreateCategory!): Category
-  updateCategory(id: UUID!, data: UpdateCategory!): Category
-  deleteCategory(id: UUID!): UUID
+  updateCategory(slug: String!, data: UpdateCategory!): Category
+  deleteCategory(slug: String!): String
 }
 
 type Category {

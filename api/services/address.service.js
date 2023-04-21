@@ -67,8 +67,9 @@ class AddressService {
 	 * @returns {Object} Object with the address updated
 	 */
 	async update(id, changes) {
-		const address = await models.Address.update(id, changes);
-		return address;
+		const address = await this.findOne(id);
+		const response = await address.update(changes);
+		return response;
 	}
 
 	/**

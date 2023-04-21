@@ -11,7 +11,7 @@ type Query {
 type Mutation {
   createUser(data: CreateUser!): User
   updateUser(username: String!, data: UpdateUser!): User
-  deleteUser(username: String!): UUID
+  deleteUser(username: String!): String
 }
 
 type User {

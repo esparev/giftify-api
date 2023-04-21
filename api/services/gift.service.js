@@ -67,8 +67,9 @@ class GiftService {
 	 * @returns {Object} Object with the gift updated
 	 */
 	async update(id, changes) {
-		const gift = await models.Gift.update(id, changes);
-		return gift;
+		const gift = await this.findOne(id);
+		const response = await gift.update(changes);
+		return response;
 	}
 
 	/**

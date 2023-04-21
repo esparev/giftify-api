@@ -108,8 +108,9 @@ class UserService {
 	 * @returns {Object} Object with the user updated
 	 */
 	async update(username, changes) {
-		const user = await models.User.update(username, changes);
-		return user;
+		const user = await this.findByUsername(username);
+		const response = await user.update(changes);
+		return response;
 	}
 
 	/**

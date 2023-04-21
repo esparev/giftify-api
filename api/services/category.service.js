@@ -85,8 +85,9 @@ class CategoryService {
 	 * @returns {Object} Object with the category updated
 	 */
 	async update(slug, changes) {
-		const category = await models.Category.update(slug, changes);
-		return category;
+		const category = await this.findBySlug(slug);
+		const response = await category.update(changes);
+		return response;
 	}
 
 	/**

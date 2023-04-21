@@ -28,23 +28,23 @@ const createUser = (_, { data }) => {
 };
 
 /**
- * Updates the user with the provided id
- * @param {id} id - id of the user
+ * Updates the user with the provided username
+ * @param {username} username - username of the user
  * @param {data} changes - data of the user
  * @returns {Object} Object with the user updated
  */
-const updateUser = (_, { id, data }) => {
-	return service.update(id, data);
+const updateUser = (_, { username, data }) => {
+	return service.update(username, data);
 };
 
 /**
- * Deletes the user with the provided id
- * @param {id} id - id of the user
+ * Deletes the user with the provided username
+ * @param {username} username - username of the user
  * @returns {Object} Object with the user deleted
  */
-const deleteUser = async (_, { id }) => {
-	await service.delete(id);
-	return id;
+const deleteUser = async (_, { username }) => {
+	await service.delete(username);
+	return username;
 };
 
 module.exports = { users, user, createUser, updateUser, deleteUser };

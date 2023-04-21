@@ -1,5 +1,6 @@
 scalar UUID
 scalar DateTime
+scalar PostalCode
 
 type Query {
   address(id: UUID!): Address
@@ -16,7 +17,7 @@ type Address {
   id: UUID!
   streetName: String!
   streetNumber: String!
-  postalCode: String!
+  postalCode: PostalCode!
   city: String!
   area: String!
   locality: String!
@@ -30,7 +31,7 @@ input CreateAddress {
   id: UUID!
   streetName: String!
   streetNumber: String!
-  postalCode: String!
+  postalCode: PostalCode!
   city: String!
   area: String!
   locality: String!
@@ -41,7 +42,7 @@ input CreateAddress {
 input UpdateAddress {
   streetName: String
   streetNumber: String
-  postalCode: String
+  postalCode: PostalCode
   city: String
   area: String
   locality: String

@@ -67,8 +67,9 @@ class CartService {
 	 * @returns {Object} Object with the cart updated
 	 */
 	async update(id, changes) {
-		const cart = await models.Cart.update(id, changes);
-		return cart;
+		const cart = await this.findOne(id);
+		const response = await cart.update(changes);
+		return response;
 	}
 
 	/**
