@@ -18,7 +18,7 @@ const { models } = require('../db/sequelize');
  * // Finds the cart with the provided id
  * service.findOne(id);
  * // Finds the cart with the provided userId
- * service.findByUserId(userId);
+ * service.findByUser(userId);
  * // Creates a cart with the provided data
  * service.create(data);
  * // Updates the cart with the provided id
@@ -57,7 +57,7 @@ class CartService {
 	 * @param {string} userId - userId of the cart
 	 * @returns {object} Object with the cart
 	 */
-	async findByUserId(userId) {
+	async findByUser(userId) {
 		const cart = await models.Cart.findOne({
 			where: { userId },
 			include: ['user', 'gifts'],
