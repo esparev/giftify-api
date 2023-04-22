@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom');
 const OrderService = require('../../services/order.service');
 const service = new OrderService();
 
@@ -12,37 +13,54 @@ const orders = () => {
 /**
  * Finds the order with the provided id
  * @param {id} id - id of the order
- * @returns {Object} Object with the order
+ * @returns {object} Object with the order
  */
-const order = (_, { id }) => {
+const order = async (_, { id }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.findOne(id);
 };
 
 /**
- * Creates a order with the provided data
- * @param {*} data - data of the order
- * @returns {Object} Object with the order created
+ * Creates a gift with the provided data
+ * @param {object} data - data of the gift
+ * @returns {object} Object with the gift created
  */
-const createOrder = (_, { data }) => {
+const createOrder = async (_, { data }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.create(data);
 };
 
 /**
  * Updates the order with the provided id
- * @param {id} id - id of the order
- * @param {data} changes - data of the order
- * @returns {Object} Object with the order updated
+ * @param {object} params - id and data of the order
+ * @param {string} params.id - id of the order
+ * @param {object} params.data - data of the order
+ * @returns {object} Object with the order updated
  */
-const updateOrder = (_, { id, data }) => {
+const updateOrder = async (_, { id, data }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.update(id, data);
 };
 
 /**
  * Deletes the order with the provided id
- * @param {id} id - id of the order
- * @returns {Object} Object with the order deleted
+ * @param {string} id - id of the order
+ * @returns {object} Object with the order deleted
  */
-const deleteOrder = async (_, { id }) => {
+const deleteOrder = async (_, { id }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	await service.delete(id);
 	return id;
 };

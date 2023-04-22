@@ -1,9 +1,10 @@
+const boom = require('@hapi/boom');
 const AddressService = require('../../services/address.service');
 const service = new AddressService();
 
 /**
  * Finds all addresses in the array of objects
- * @returns {Array} Array with all addresses
+ * @returns {array} Array with all addresses
  */
 const addresses = () => {
 	return service.find();
@@ -12,37 +13,54 @@ const addresses = () => {
 /**
  * Finds the address with the provided id
  * @param {id} id - id of the address
- * @returns {Object} Object with the address
+ * @returns {object} Object with the address
  */
-const address = (_, { id }) => {
+const address = async (_, { id }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.findOne(id);
 };
 
 /**
  * Creates a address with the provided data
- * @param {*} data - data of the address
- * @returns {Object} Object with the address created
+ * @param {object} data - data of the address
+ * @returns {object} Object with the address created
  */
-const createAddress = (_, { data }) => {
+const createAddress = async (_, { data }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.create(data);
 };
 
 /**
  * Updates the address with the provided id
- * @param {id} id - id of the address
- * @param {data} changes - data of the address
- * @returns {Object} Object with the address updated
+ * @param {object} params - id and data of the address
+ * @param {string} params.id - id of the address
+ * @param {object} params.data - data of the address
+ * @returns {object} Object with the address updated
  */
-const updateAddress = (_, { id, data }) => {
+const updateAddress = async (_, { id, data }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.update(id, data);
 };
 
 /**
  * Deletes the address with the provided id
- * @param {id} id - id of the address
- * @returns {Object} Object with the address deleted
+ * @param {string} id - id of the address
+ * @returns {object} Object with the address deleted
  */
-const deleteAddress = async (_, { id }) => {
+const deleteAddress = async (_, { id }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	await service.delete(id);
 	return id;
 };

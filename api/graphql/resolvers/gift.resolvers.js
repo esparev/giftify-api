@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom');
 const GiftService = require('../../services/gift.service');
 const service = new GiftService();
 
@@ -12,7 +13,7 @@ const gifts = () => {
 /**
  * Finds the gift with the provided id
  * @param {id} id - id of the gift
- * @returns {Object} Object with the gift
+ * @returns {object} Object with the gift
  */
 const gift = (_, { id }) => {
 	return service.findOne(id);
@@ -20,29 +21,42 @@ const gift = (_, { id }) => {
 
 /**
  * Creates a gift with the provided data
- * @param {*} data - data of the gift
- * @returns {Object} Object with the gift created
+ * @param {object} data - data of the gift
+ * @returns {object} Object with the gift created
  */
-const createGift = (_, { data }) => {
+const createGift = async (_, { data }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.create(data);
 };
 
 /**
  * Updates the gift with the provided id
- * @param {id} id - id of the gift
- * @param {data} changes - data of the gift
- * @returns {Object} Object with the gift updated
+ * @param {object} params - id and data of the gift
+ * @param {string} params.id - id of the gift
+ * @param {object} params.data - data of the gift
+ * @returns {object} Object with the gift updated
  */
-const updateGift = (_, { id, data }) => {
+const updateGift = async (_, { id, data }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	return service.update(id, data);
 };
 
 /**
  * Deletes the gift with the provided id
- * @param {id} id - id of the gift
- * @returns {Object} Object with the gift deleted
+ * @param {string} id - id of the gift
+ * @returns {object} Object with the gift deleted
  */
-const deleteGift = async (_, { id }) => {
+const deleteGift = async (_, { id }, context) => {
+	const { user } = await context.authenticate('jwt', { session: false });
+	if (!user) {
+		throw boom.unauthorized('No tienes permiso para realizar esta acción');
+	}
 	await service.delete(id);
 	return id;
 };
