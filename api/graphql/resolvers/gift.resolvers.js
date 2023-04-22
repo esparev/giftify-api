@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const GiftService = require('../../services/gift.service');
 const service = new GiftService();
 
@@ -26,6 +27,7 @@ const gift = (_, { id }) => {
  */
 const createGift = async (_, { data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.create(data);
 };
 
@@ -38,6 +40,7 @@ const createGift = async (_, { data }, context) => {
  */
 const updateGift = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.update(id, data);
 };
 
@@ -48,6 +51,7 @@ const updateGift = async (_, { id, data }, context) => {
  */
 const deleteGift = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	await service.delete(id);
 	return id;
 };

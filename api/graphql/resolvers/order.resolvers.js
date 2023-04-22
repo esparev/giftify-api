@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const OrderService = require('../../services/order.service');
 const service = new OrderService();
 
@@ -6,7 +7,9 @@ const service = new OrderService();
  * Finds all orders in the array of objects.
  * @returns {array} Array with all orders
  */
-const orders = () => {
+const orders = async (_, {}, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.find();
 };
 
@@ -17,6 +20,7 @@ const orders = () => {
  */
 const order = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.findOne(id);
 };
 
@@ -27,6 +31,7 @@ const order = async (_, { id }, context) => {
  */
 const createOrder = async (_, { data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.create(data);
 };
 
@@ -39,6 +44,7 @@ const createOrder = async (_, { data }, context) => {
  */
 const updateOrder = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.update(id, data);
 };
 
@@ -49,6 +55,7 @@ const updateOrder = async (_, { id, data }, context) => {
  */
 const deleteOrder = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	await service.delete(id);
 	return id;
 };

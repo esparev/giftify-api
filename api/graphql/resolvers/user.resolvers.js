@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const UserService = require('../../services/user.service');
 const service = new UserService();
 
@@ -6,7 +7,9 @@ const service = new UserService();
  * Finds all users in the array of objects.
  * @returns {array} Array with all users
  */
-const users = () => {
+const users = async (_, {}, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.find();
 };
 
@@ -15,7 +18,9 @@ const users = () => {
  * @param {string} username - username of the user
  * @returns {object} Object with the user
  */
-const user = (_, { username }) => {
+const user = async (_, { username }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.findByUsername(username);
 };
 
@@ -37,6 +42,7 @@ const createUser = (_, { data }) => {
  */
 const updateUser = async (_, { username, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.update(username, data);
 };
 
@@ -47,6 +53,7 @@ const updateUser = async (_, { username, data }, context) => {
  */
 const deleteUser = async (_, { username }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	await service.delete(username);
 	return username;
 };

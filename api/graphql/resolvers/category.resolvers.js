@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const CategoryService = require('../../services/category.service');
 const service = new CategoryService();
 
@@ -6,7 +7,7 @@ const service = new CategoryService();
  * Finds all categories in the array of objects.
  * @returns {array} Array with all categories
  */
-const categories = () => {
+const categories =  () => {
 	return service.find();
 };
 
@@ -26,6 +27,7 @@ const category = (_, { id }) => {
  */
 const createCategory = async (_, { data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.create(data);
 };
 
@@ -38,6 +40,7 @@ const createCategory = async (_, { data }, context) => {
  */
 const updateCategory = async (_, { slug, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.update(slug, data);
 };
 
@@ -48,6 +51,7 @@ const updateCategory = async (_, { slug, data }, context) => {
  */
 const deleteCategory = async (_, { slug }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	await service.delete(slug);
 	return slug;
 };

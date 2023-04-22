@@ -57,7 +57,7 @@ class AuthService {
 	 * @returns {object} the user and the signed token
 	 */
 	signToken(user) {
-		const payload = { sub: user.id, scope: user.role };
+		const payload = { sub: user.id, role: user.role };
 
 		const token = jwt.sign(payload, config.jwtSecret);
 		delete user.dataValues.recoveryToken;

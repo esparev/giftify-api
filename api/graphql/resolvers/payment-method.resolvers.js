@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const PaymentMethodService = require('../../services/payment-method.service');
 const service = new PaymentMethodService();
 
@@ -6,7 +7,9 @@ const service = new PaymentMethodService();
  * Finds all payment methods in the array of objects.
  * @returns {array} Array with all payment methods
  */
-const paymentMethods = () => {
+const paymentMethods = async (_, {}, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.find();
 };
 
@@ -17,6 +20,7 @@ const paymentMethods = () => {
  */
 const paymentMethod = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.findOne(id);
 };
 
@@ -27,6 +31,7 @@ const paymentMethod = async (_, { id }, context) => {
  */
 const createPaymentMethod = async (_, { data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.create(data);
 };
 
@@ -39,6 +44,7 @@ const createPaymentMethod = async (_, { data }, context) => {
  */
 const updatePaymentMethod = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.update(id, data);
 };
 
@@ -49,6 +55,7 @@ const updatePaymentMethod = async (_, { id, data }, context) => {
  */
 const deletePaymentMethod = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	await service.delete(id);
 	return id;
 };

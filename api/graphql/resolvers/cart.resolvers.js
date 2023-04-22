@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const CartService = require('../../services/cart.service');
 const service = new CartService();
 
@@ -6,7 +7,9 @@ const service = new CartService();
  * Finds all carts in the array of objects.
  * @returns {array} Array with all carts
  */
-const carts = () => {
+const carts = async (_, {}, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.find();
 };
 
@@ -17,6 +20,7 @@ const carts = () => {
  */
 const cart = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.findOne(id);
 };
 
@@ -27,6 +31,7 @@ const cart = async (_, { id }, context) => {
  */
 const createCart = async (_, { data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.create(data);
 };
 
@@ -39,6 +44,7 @@ const createCart = async (_, { data }, context) => {
  */
 const updateCart = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.update(id, data);
 };
 
@@ -49,6 +55,7 @@ const updateCart = async (_, { id, data }, context) => {
  */
 const deleteCart = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	await service.delete(id);
 	return id;
 };

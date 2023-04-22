@@ -1,4 +1,5 @@
 const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const AddressService = require('../../services/address.service');
 const service = new AddressService();
 
@@ -6,7 +7,9 @@ const service = new AddressService();
  * Finds all addresses in the array of objects.
  * @returns {array} Array with all addresses
  */
-const addresses = () => {
+const addresses = async (_, {}, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.find();
 };
 
@@ -17,6 +20,7 @@ const addresses = () => {
  */
 const address = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.findOne(id);
 };
 
@@ -27,6 +31,7 @@ const address = async (_, { id }, context) => {
  */
 const createAddress = async (_, { data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.create(data);
 };
 
@@ -39,6 +44,7 @@ const createAddress = async (_, { data }, context) => {
  */
 const updateAddress = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	return service.update(id, data);
 };
 
@@ -49,6 +55,7 @@ const updateAddress = async (_, { id, data }, context) => {
  */
 const deleteAddress = async (_, { id }, context) => {
 	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
 	await service.delete(id);
 	return id;
 };
