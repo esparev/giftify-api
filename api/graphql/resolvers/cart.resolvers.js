@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom');
+const checkJwt = require('../../../utils/checkJwt');
 const CartService = require('../../services/cart.service');
 const service = new CartService();
 
@@ -16,10 +16,7 @@ const carts = () => {
  * @returns {object} Object with the cart
  */
 const cart = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.findOne(id);
 };
 
@@ -29,10 +26,7 @@ const cart = async (_, { id }, context) => {
  * @returns {object} Object with the cart created
  */
 const createCart = async (_, { data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.create(data);
 };
 
@@ -44,10 +38,7 @@ const createCart = async (_, { data }, context) => {
  * @returns {object} Object with the cart updated
  */
 const updateCart = async (_, { id, data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.update(id, data);
 };
 
@@ -57,10 +48,7 @@ const updateCart = async (_, { id, data }, context) => {
  * @returns {object} Object with the cart deleted
  */
 const deleteCart = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	await service.delete(id);
 	return id;
 };

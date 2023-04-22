@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom');
+const checkJwt = require('../../../utils/checkJwt');
 const PaymentMethodService = require('../../services/payment-method.service');
 const service = new PaymentMethodService();
 
@@ -16,10 +16,7 @@ const paymentMethods = () => {
  * @returns {object} Object with the payment method
  */
 const paymentMethod = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.findOne(id);
 };
 
@@ -29,10 +26,7 @@ const paymentMethod = async (_, { id }, context) => {
  * @returns {object} Object with the payment method created
  */
 const createPaymentMethod = async (_, { data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.create(data);
 };
 
@@ -44,10 +38,7 @@ const createPaymentMethod = async (_, { data }, context) => {
  * @returns {object} Object with the address updated
  */
 const updatePaymentMethod = async (_, { id, data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.update(id, data);
 };
 
@@ -57,10 +48,7 @@ const updatePaymentMethod = async (_, { id, data }, context) => {
  * @returns {object} Object with the payment method deleted
  */
 const deletePaymentMethod = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	await service.delete(id);
 	return id;
 };

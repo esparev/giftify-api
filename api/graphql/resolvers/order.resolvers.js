@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom');
+const checkJwt = require('../../../utils/checkJwt');
 const OrderService = require('../../services/order.service');
 const service = new OrderService();
 
@@ -16,10 +16,7 @@ const orders = () => {
  * @returns {object} Object with the order
  */
 const order = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.findOne(id);
 };
 
@@ -29,10 +26,7 @@ const order = async (_, { id }, context) => {
  * @returns {object} Object with the gift created
  */
 const createOrder = async (_, { data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.create(data);
 };
 
@@ -44,10 +38,7 @@ const createOrder = async (_, { data }, context) => {
  * @returns {object} Object with the order updated
  */
 const updateOrder = async (_, { id, data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.update(id, data);
 };
 
@@ -57,10 +48,7 @@ const updateOrder = async (_, { id, data }, context) => {
  * @returns {object} Object with the order deleted
  */
 const deleteOrder = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	await service.delete(id);
 	return id;
 };

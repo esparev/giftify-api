@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom');
+const checkJwt = require('../../../utils/checkJwt');
 const GiftService = require('../../services/gift.service');
 const service = new GiftService();
 
@@ -25,10 +25,7 @@ const gift = (_, { id }) => {
  * @returns {object} Object with the gift created
  */
 const createGift = async (_, { data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.create(data);
 };
 
@@ -40,10 +37,7 @@ const createGift = async (_, { data }, context) => {
  * @returns {object} Object with the gift updated
  */
 const updateGift = async (_, { id, data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.update(id, data);
 };
 
@@ -53,10 +47,7 @@ const updateGift = async (_, { id, data }, context) => {
  * @returns {object} Object with the gift deleted
  */
 const deleteGift = async (_, { id }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	await service.delete(id);
 	return id;
 };

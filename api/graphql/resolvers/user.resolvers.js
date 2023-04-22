@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom');
+const checkJwt = require('../../../utils/checkJwt');
 const UserService = require('../../services/user.service');
 const service = new UserService();
 
@@ -36,10 +36,7 @@ const createUser = (_, { data }) => {
  * @returns {object} Object with the user updated
  */
 const updateUser = async (_, { username, data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.update(username, data);
 };
 
@@ -49,10 +46,7 @@ const updateUser = async (_, { username, data }, context) => {
  * @returns {object} Object with the user deleted
  */
 const deleteUser = async (_, { username }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	await service.delete(username);
 	return username;
 };

@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom');
+const checkJwt = require('../../../utils/checkJwt');
 const CategoryService = require('../../services/category.service');
 const service = new CategoryService();
 
@@ -25,10 +25,7 @@ const category = (_, { id }) => {
  * @returns {object} Object with the category created
  */
 const createCategory = async (_, { data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.create(data);
 };
 
@@ -40,10 +37,7 @@ const createCategory = async (_, { data }, context) => {
  * @returns {object} Object with the category updated
  */
 const updateCategory = async (_, { slug, data }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	return service.update(slug, data);
 };
 
@@ -53,10 +47,7 @@ const updateCategory = async (_, { slug, data }, context) => {
  * @returns {object} Object with the category deleted
  */
 const deleteCategory = async (_, { slug }, context) => {
-	const { user } = await context.authenticate('jwt', { session: false });
-	if (!user) {
-		throw boom.unauthorized('No tienes permiso para realizar esta acción');
-	}
+	const user = await checkJwt(context);
 	await service.delete(slug);
 	return slug;
 };
