@@ -21,7 +21,7 @@ type Category {
 }
 
 input CreateCategory {
-  id: UUID!
+  id: UUID
   slug: String!
   name: String!
 }

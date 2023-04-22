@@ -28,7 +28,7 @@ type Address {
 }
 
 input CreateAddress {
-  id: UUID!
+  id: UUID
   streetName: String!
   streetNumber: String!
   postalCode: PostalCode!

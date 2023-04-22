@@ -24,7 +24,7 @@ type Order {
 }
 
 input CreateOrder {
-  id: UUID!
+  id: UUID
   total: Float!
   status: String!
   userId: UUID!

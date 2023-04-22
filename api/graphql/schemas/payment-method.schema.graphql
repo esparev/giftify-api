@@ -27,7 +27,7 @@ type PaymentMethod {
 }
 
 input CreatePaymentMethod {
-  id: UUID!
+  id: UUID
   alias: String!
   cardholderName: String!
   number: String!
