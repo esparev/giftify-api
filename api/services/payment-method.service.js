@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the payment method with the provided id
  * service.findOne(id);
+ * // Finds all payment methods with the provided userId
+ * service.findByUser(userId);
  * // Creates a payment method with the provided data
  * service.create(data);
  * // Updates the payment method with the provided id
@@ -48,6 +50,19 @@ class PaymentMethodService {
 			throw boom.notFound('Payment method not found');
 		}
 		return paymentMethod;
+	}
+
+	/**
+	 * Finds the paymentMethods with the provided userId
+	 * @param {string} userId - userId of the paymentMethods
+	 * @returns {Array} Array with all paymentMethods
+	 */
+	async findByUser(userId) {
+		const paymentMethods = await models.PaymentMethod.findAll({
+			where: { userId },
+			include: ['user'],
+		});
+		return paymentMethods;
 	}
 
 	/**

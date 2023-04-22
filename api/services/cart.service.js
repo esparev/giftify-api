@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the cart with the provided id
  * service.findOne(id);
+ * // Finds the cart with the provided userId
+ * service.findByUserId(userId);
  * // Creates a cart with the provided data
  * service.create(data);
  * // Updates the cart with the provided id
@@ -31,7 +33,7 @@ class CartService {
 	 * @returns {Array} Array with all carts
 	 */
 	async find() {
-		const carts = await models.Cart.findAll();
+		const carts = await models.Cart.findAll({ include: ['user'] });
 		return carts;
 	}
 
@@ -42,6 +44,22 @@ class CartService {
 	 */
 	async findOne(id) {
 		const cart = await models.Cart.findByPk(id, {
+			include: ['user', 'gifts'],
+		});
+		if (!cart) {
+			throw boom.notFound('Cart not found');
+		}
+		return cart;
+	}
+
+	/**
+	 * Finds the cart with the provided userId
+	 * @param {string} userId - userId of the cart
+	 * @returns {object} Object with the cart
+	 */
+	async findByUserId(userId) {
+		const cart = await models.Cart.findOne({
+			where: { userId },
 			include: ['user', 'gifts'],
 		});
 		if (!cart) {

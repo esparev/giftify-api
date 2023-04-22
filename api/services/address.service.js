@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the address with the provided id
  * service.findOne(id);
+ * // Finds all addresses with the provided userId
+ * service.findByUser(userId);
  * // Creates a address with the provided data
  * service.create(data);
  * // Updates the address with the provided id
@@ -48,6 +50,19 @@ class AddressService {
 			throw boom.notFound('Address not found');
 		}
 		return address;
+	}
+
+	/**
+	 * Finds the addresses with the provided userId
+	 * @param {string} userId - userId of the addresses
+	 * @returns {Array} Array with all addresses
+	 */
+	async findByUser(userId) {
+		const addresses = await models.Address.findAll({
+			where: { userId },
+			include: ['user'],
+		});
+		return addresses;
 	}
 
 	/**

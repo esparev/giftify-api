@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the order with the provided id
  * service.findOne(id);
+ * // Finds all orders with the provided userId
+ * service.findByUser(userId);
  * // Creates an order with the provided data
  * service.create(data);
  * // Updates the order with the provided id
@@ -48,6 +50,19 @@ class OrderService {
 			throw boom.notFound('Order not found');
 		}
 		return order;
+	}
+
+	/**
+	 * Finds the orders with the provided userId
+	 * @param {string} userId - userId of the orders
+	 * @returns {Array} Array with all orders
+	 */
+	async findByUser(userId) {
+		const orders = await models.Order.findAll({
+			where: { userId },
+			include: ['user'],
+		});
+		return orders;
 	}
 
 	/**

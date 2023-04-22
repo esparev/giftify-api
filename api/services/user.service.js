@@ -1,6 +1,14 @@
 const boom = require('@hapi/boom');
 const bcrypt = require('bcrypt');
 const { models } = require('../db/sequelize');
+const CartService = require('./cart.service');
+const OrderService = require('./order.service');
+const AddressService = require('./address.service');
+const PaymentMethodService = require('./payment-method.service');
+const cartService = new CartService();
+const orderService = new OrderService();
+const addressService = new AddressService();
+const paymentMethodService = new PaymentMethodService();
 
 /**
  * User Service class to manage the logic of the users
@@ -98,6 +106,8 @@ class UserService {
 
 		delete user.dataValues.password;
 		delete user.dataValues.recoveryToken;
+		await cartService.create({ userId: user.id });
+
 		return user;
 	}
 
@@ -120,7 +130,23 @@ class UserService {
 	 */
 	async delete(username) {
 		const user = await this.findByUsername(username);
+		const cart = await cartService.findByUser(user.id);
+		const orders = await orderService.findByUser(user.id);
+		const addresses = await addressService.findByUser(user.id);
+		const paymentMethods = await paymentMethodService.findByUser(user.id);
+
+		orders.map(async (order) => {
+			await order.destroy();
+		});
+		addresses.map(async (address) => {
+			await address.destroy();
+		});
+		paymentMethods.map(async (paymentMethod) => {
+			await paymentMethod.destroy();
+		});
+		await cart.destroy();
 		await user.destroy();
+
 		return { username };
 	}
 }
