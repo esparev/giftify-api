@@ -3,7 +3,7 @@ const UserService = require('../../services/user.service');
 const service = new UserService();
 
 /**
- * Finds all users in the array of objects
+ * Finds all users in the array of objects.
  * @returns {array} Array with all users
  */
 const users = () => {
@@ -11,7 +11,7 @@ const users = () => {
 };
 
 /**
- * Finds the user with the provided username
+ * Finds the user with the provided username.
  * @param {string} username - username of the user
  * @returns {object} Object with the user
  */
@@ -20,7 +20,7 @@ const user = (_, { username }) => {
 };
 
 /**
- * Creates a user with the provided data
+ * Creates a user with the provided data.
  * @param {object} data - data of the user
  * @returns {object} Object with the user created
  */
@@ -29,7 +29,7 @@ const createUser = (_, { data }) => {
 };
 
 /**
- * Updates the user with the provided username
+ * Updates the user with the provided username.
  * @param {object} params - username and data of the user
  * @param {string} params.username - username of the user
  * @param {object} params.data - data of the user
@@ -44,7 +44,7 @@ const updateUser = async (_, { username, data }, context) => {
 };
 
 /**
- * Deletes the user with the provided username
+ * Deletes the user with the provided username.
  * @param {string} params - username of the user
  * @returns {object} Object with the user deleted
  */

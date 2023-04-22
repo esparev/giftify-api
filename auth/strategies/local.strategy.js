@@ -4,7 +4,7 @@ const service = new AuthService();
 
 /**
  * Local passport strategy with various
- * validations to protect the user's account
+ * validations to protect the user's account.
  */
 const LocalStrategy = new Strategy(
 	{

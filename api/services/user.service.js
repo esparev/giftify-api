@@ -11,7 +11,7 @@ const addressService = new AddressService();
 const paymentMethodService = new PaymentMethodService();
 
 /**
- * User Service class to manage the logic of the users
+ * User Service class to manage the logic of the users.
  *
  * #### Example
  *
@@ -40,8 +40,8 @@ const paymentMethodService = new PaymentMethodService();
  */
 class UserService {
 	/**
-	 * Finds all users in the array of objects
-	 * @returns {Array} Array with all users
+	 * Finds all users in the array of objects.
+	 * @returns {array} Array with all users
 	 */
 	async find() {
 		const users = await models.User.findAll();
@@ -49,9 +49,9 @@ class UserService {
 	}
 
 	/**
-	 * Finds the user with the provided id
-	 * @param {id} id - id of the user
-	 * @returns {Object} Object with the user
+	 * Finds the user with the provided id.
+	 * @param {string} id - id of the user
+	 * @returns {object} Object with the user
 	 */
 	async findOne(id) {
 		const user = await models.User.findByPk(id, {
@@ -64,9 +64,9 @@ class UserService {
 	}
 
 	/**
-	 * Finds the user with the provided username
+	 * Finds the user with the provided username.
 	 * @param {string} username - username of the user
-	 * @returns {Object} Object with the user
+	 * @returns {object} Object with the user
 	 */
 	async findByUsername(username) {
 		const user = await models.User.findOne({
@@ -80,9 +80,9 @@ class UserService {
 	}
 
 	/**
-	 * Finds the user with the provided email
+	 * Finds the user with the provided email.
 	 * @param {string} email - email of the user
-	 * @returns {Object} Object with the user
+	 * @returns {object} Object with the user
 	 */
 	async findByEmail(email) {
 		const user = await models.User.findOne({
@@ -96,9 +96,9 @@ class UserService {
 	}
 
 	/**
-	 * Creates a user with the provided data
-	 * @param {*} data - data of the user
-	 * @returns {Object} Object with the user created
+	 * Creates a user with the provided data and creates a cart for the user.
+	 * @param {object} data - data of the user
+	 * @returns {object} Object with the user created
 	 */
 	async create(data) {
 		const hash = await bcrypt.hash(data.password, 13);
@@ -112,10 +112,10 @@ class UserService {
 	}
 
 	/**
-	 * Updates the user with the provided username
+	 * Updates the user with the provided username.
 	 * @param {username} username - username of the user
-	 * @param {*} changes - data of the user
-	 * @returns {Object} Object with the user updated
+	 * @param {object} changes - data of the user
+	 * @returns {object} Object with the user updated
 	 */
 	async update(username, changes) {
 		const user = await this.findByUsername(username);
@@ -125,8 +125,10 @@ class UserService {
 
 	/**
 	 * Deletes the user with the provided username
-	 * @param {username} username - username of the user
-	 * @returns {Object} Object with the user deleted
+	 * and deletes all the addresses, payment methods,
+	 * orders and cart of the user.
+	 * @param {string} username - username of the user
+	 * @returns {object} Object with the user deleted
 	 */
 	async delete(username) {
 		const user = await this.findByUsername(username);

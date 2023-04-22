@@ -7,20 +7,31 @@ const service = new UserService();
 const { config } = require('../config');
 
 /**
- * Auth Service class to manage the logic of the auth
- * 
+ * Auth Service class to manage the logic of the auth.
+ *
  * #### Example
  * ```javascript
  * const service = new AuthService();
  * ```
- * 
+ *
+ * #### Functions
+ * ```javascript
+ * // Finds the user with the email and password
+ * service.getUser(email, password);
+ * // Signs a JWT token with the user information
+ * service.signToken(user);
+ * // Sends an email to the user's email address
+ * service.sendMail(infoMail);
+ * // Provides information to the email
+ * service.sendRecovery(email);
+ * // Changes the user's password with the recovery token
+ * service.changePassword(token, password);
+ * ```
  */
 class AuthService {
 	/**
-	 * Finds the user with the email and password
-	 * and validates the existence of a user
-	 * by comparing the provided password
-	 * with the stored password
+	 * Finds the user with the email and password and validates the existence
+	 * of a user  by comparing the provided password with the stored password.
 	 * @param {string} email - user email
 	 * @param {string} password - user password
 	 * @returns {object} user that matches the email and password
@@ -41,21 +52,12 @@ class AuthService {
 	}
 
 	/**
-	 * Firma un token JWT con la informacion
-	 * necesaria del usuario para definir su rol
-	 * @param {*} user - objeto usuario
-	 * @returns - token firmado
-	 */
-	/**
-	 * Signs a JWT token with the user information
-	 * @param {*} user - user object
-	 * @returns {*} signed token
+	 * Signs a JWT token with the user information.
+	 * @param {object} user - user object
+	 * @returns {object} the user and the signed token
 	 */
 	signToken(user) {
-		const payload = {
-			sub: user.id,
-			scope: user.role,
-		};
+		const payload = { sub: user.id, scope: user.role };
 
 		const token = jwt.sign(payload, config.jwtSecret);
 		delete user.dataValues.recoveryToken;
@@ -64,20 +66,16 @@ class AuthService {
 	}
 
 	/**
-	 * Sends an email to the user's email with
-	 * the nodemailer transport object
-	 * @param {*} infoMail - user email
-	 * @returns {*} response message
+	 * Sends an email to the user's email address with the nodemailer transport object.
+	 * @param {object} infoMail - user email
+	 * @returns {object} response message
 	 */
 	async sendMail(infoMail) {
 		const transporter = nodemailer.createTransport({
-			host: 'smtp.gmail.com',
-			secure: true,
 			port: 465,
-			auth: {
-				user: config.smtpEmail,
-				pass: config.smtpPassword,
-			},
+			secure: true,
+			host: 'smtp.gmail.com',
+			auth: { user: config.smtpEmail, pass: config.smtpPassword },
 		});
 
 		await transporter.sendMail(infoMail);
@@ -85,12 +83,11 @@ class AuthService {
 	}
 
 	/**
-	 * Provides information to the email
-	 * @param {*} email - user email
-	 * @returns {*} email sent
+	 * Provides information to the email.
+	 * @param {string} email - user email
+	 * @returns {object} email sent
 	 */
 	async sendRecovery(email) {
-		// Valida si el usuario existe
 		const user = await service.findByEmail(email);
 
 		if (!user) {
@@ -120,10 +117,10 @@ class AuthService {
 	}
 
 	/**
-	 * Changes the user's password with the recovery token
-	 * @param {*} token - recovery token
-	 * @param {*} newPassword - new password
-	 * @returns {*} response message
+	 * Changes the user's password with the recovery token.
+	 * @param {string} token - recovery token
+	 * @param {string} newPassword - new password
+	 * @returns {object} response message
 	 */
 	async changePassword(token, newPassword) {
 		try {

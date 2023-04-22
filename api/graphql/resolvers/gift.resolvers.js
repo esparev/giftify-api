@@ -3,15 +3,15 @@ const GiftService = require('../../services/gift.service');
 const service = new GiftService();
 
 /**
- * Finds all gifts in the array of objects
- * @returns {Array} Array with all gifts
+ * Finds all gifts in the array of objects.
+ * @returns {array} Array with all gifts
  */
 const gifts = () => {
 	return service.find();
 };
 
 /**
- * Finds the gift with the provided id
+ * Finds the gift with the provided id.
  * @param {id} id - id of the gift
  * @returns {object} Object with the gift
  */
@@ -20,7 +20,7 @@ const gift = (_, { id }) => {
 };
 
 /**
- * Creates a gift with the provided data
+ * Creates a gift with the provided data.
  * @param {object} data - data of the gift
  * @returns {object} Object with the gift created
  */
@@ -33,7 +33,7 @@ const createGift = async (_, { data }, context) => {
 };
 
 /**
- * Updates the gift with the provided id
+ * Updates the gift with the provided id.
  * @param {object} params - id and data of the gift
  * @param {string} params.id - id of the gift
  * @param {object} params.data - data of the gift
@@ -48,7 +48,7 @@ const updateGift = async (_, { id, data }, context) => {
 };
 
 /**
- * Deletes the gift with the provided id
+ * Deletes the gift with the provided id.
  * @param {string} id - id of the gift
  * @returns {object} Object with the gift deleted
  */

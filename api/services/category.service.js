@@ -2,7 +2,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
 
 /**
- * Category Service class to manage the logic of the categories
+ * Category Service class to manage the logic of the categories.
  *
  * #### Example
  *
@@ -29,8 +29,8 @@ const { models } = require('../db/sequelize');
  */
 class CategoryService {
 	/**
-	 * Finds all categories in the array of objects
-	 * @returns {Array} Array with all categories
+	 * Finds all categories in the array of objects.
+	 * @returns {array} Array with all categories
 	 */
 	async find() {
 		const categories = await models.Category.findAll();
@@ -38,9 +38,9 @@ class CategoryService {
 	}
 
 	/**
-	 * Finds the category with the provided id
-	 * @param {id} id - id of the category
-	 * @returns {Object} Object with the category
+	 * Finds the category with the provided id.
+	 * @param {string} id - id of the category
+	 * @returns {object} Object with the category
 	 */
 	async findOne(id) {
 		const category = await models.Category.findByPk(id, {
@@ -53,9 +53,9 @@ class CategoryService {
 	}
 
 	/**
-	 * Finds the category with the provided slug
+	 * Finds the category with the provided slug.
 	 * @param {string} slug - slug of the category
-	 * @returns {Object} Object with the category
+	 * @returns {object} Object with the category
 	 */
 	async findBySlug(slug) {
 		const category = await models.Category.findOne({
@@ -69,9 +69,9 @@ class CategoryService {
 	}
 
 	/**
-	 * Creates a category with the provided data
-	 * @param {*} data - data of the category
-	 * @returns {Object} Object with the category created
+	 * Creates a category with the provided data.
+	 * @param {object} data - data of the category
+	 * @returns {object} Object with the category created
 	 */
 	async create(data) {
 		const category = await models.Category.create(data);
@@ -79,10 +79,10 @@ class CategoryService {
 	}
 
 	/**
-	 * Updates the category with the provided slug
-	 * @param {slug} slug - slug of the category
-	 * @param {*} changes - data of the category
-	 * @returns {Object} Object with the category updated
+	 * Updates the category with the provided slug.
+	 * @param {string} slug - slug of the category
+	 * @param {object} changes - data of the category
+	 * @returns {object} Object with the category updated
 	 */
 	async update(slug, changes) {
 		const category = await this.findBySlug(slug);
@@ -91,9 +91,9 @@ class CategoryService {
 	}
 
 	/**
-	 * Deletes the category with the provided slug
-	 * @param {slug} slug - slug of the category
-	 * @returns {Object} Object with the category deleted
+	 * Deletes the category with the provided slug.
+	 * @param {string} slug - slug of the category
+	 * @returns {object} Object with the category deleted
 	 */
 	async delete(slug) {
 		const category = await this.findBySlug(slug);

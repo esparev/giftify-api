@@ -2,7 +2,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
 
 /**
- * Gift Service class to manage the logic of the gifts
+ * Gift Service class to manage the logic of the gifts.
  *
  * #### Example
  *
@@ -27,8 +27,8 @@ const { models } = require('../db/sequelize');
  */
 class GiftService {
 	/**
-	 * Finds all gifts in the array of objects
-	 * @returns {Array} Array with all gifts
+	 * Finds all gifts in the array of objects.
+	 * @returns {array} Array with all gifts
 	 */
 	async find() {
 		const gifts = await models.Gift.findAll({ include: ['category'] });
@@ -36,9 +36,9 @@ class GiftService {
 	}
 
 	/**
-	 * Finds the gift with the provided id
-	 * @param {id} id - id of the gift
-	 * @returns {Object} Object with the gift
+	 * Finds the gift with the provided id.
+	 * @param {string} id - id of the gift
+	 * @returns {object} Object with the gift
 	 */
 	async findOne(id) {
 		const gift = await models.Gift.findByPk(id, {
@@ -51,9 +51,9 @@ class GiftService {
 	}
 
 	/**
-	 * Creates a gift with the provided data
-	 * @param {*} data - data of the gift
-	 * @returns {Object} Object with the gift created
+	 * Creates a gift with the provided data.
+	 * @param {object} data - data of the gift
+	 * @returns {object} Object with the gift created
 	 */
 	async create(data) {
 		const gift = await models.Gift.create(data);
@@ -61,10 +61,10 @@ class GiftService {
 	}
 
 	/**
-	 * Updates the gift with the provided id
-	 * @param {id} id - id of the gift
-	 * @param {*} changes - data of the gift
-	 * @returns {Object} Object with the gift updated
+	 * Updates the gift with the provided id.
+	 * @param {string} id - id of the gift
+	 * @param {object} changes - data of the gift
+	 * @returns {object} Object with the gift updated
 	 */
 	async update(id, changes) {
 		const gift = await this.findOne(id);
@@ -73,9 +73,9 @@ class GiftService {
 	}
 
 	/**
-	 * Deletes the gift with the provided id
-	 * @param {id} id - id of the gift
-	 * @returns {Object} Object with the gift deleted
+	 * Deletes the gift with the provided id.
+	 * @param {string} id - id of the gift
+	 * @returns {object} Object with the gift deleted
 	 */
 	async delete(id) {
 		const gift = await this.findOne(id);

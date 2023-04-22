@@ -3,7 +3,7 @@ const AddressService = require('../../services/address.service');
 const service = new AddressService();
 
 /**
- * Finds all addresses in the array of objects
+ * Finds all addresses in the array of objects.
  * @returns {array} Array with all addresses
  */
 const addresses = () => {
@@ -11,7 +11,7 @@ const addresses = () => {
 };
 
 /**
- * Finds the address with the provided id
+ * Finds the address with the provided id.
  * @param {id} id - id of the address
  * @returns {object} Object with the address
  */
@@ -24,7 +24,7 @@ const address = async (_, { id }, context) => {
 };
 
 /**
- * Creates a address with the provided data
+ * Creates a address with the provided data.
  * @param {object} data - data of the address
  * @returns {object} Object with the address created
  */
@@ -37,7 +37,7 @@ const createAddress = async (_, { data }, context) => {
 };
 
 /**
- * Updates the address with the provided id
+ * Updates the address with the provided id.
  * @param {object} params - id and data of the address
  * @param {string} params.id - id of the address
  * @param {object} params.data - data of the address
@@ -52,7 +52,7 @@ const updateAddress = async (_, { id, data }, context) => {
 };
 
 /**
- * Deletes the address with the provided id
+ * Deletes the address with the provided id.
  * @param {string} id - id of the address
  * @returns {object} Object with the address deleted
  */

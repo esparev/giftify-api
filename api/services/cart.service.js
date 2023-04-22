@@ -2,7 +2,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
 
 /**
- * Cart Service class to manage the logic of the carts
+ * Cart Service class to manage the logic of the carts.
  *
  * #### Example
  *
@@ -29,8 +29,8 @@ const { models } = require('../db/sequelize');
  */
 class CartService {
 	/**
-	 * Finds all carts in the array of objects
-	 * @returns {Array} Array with all carts
+	 * Finds all carts in the array of objects.
+	 * @returns {array} Array with all carts
 	 */
 	async find() {
 		const carts = await models.Cart.findAll({ include: ['user'] });
@@ -38,9 +38,9 @@ class CartService {
 	}
 
 	/**
-	 * Finds the cart with the provided id
+	 * Finds the cart with the provided id.
 	 * @param {string} id - id of the cart
-	 * @returns {Object} Object with the cart
+	 * @returns {object} Object with the cart
 	 */
 	async findOne(id) {
 		const cart = await models.Cart.findByPk(id, {
@@ -53,7 +53,7 @@ class CartService {
 	}
 
 	/**
-	 * Finds the cart with the provided userId
+	 * Finds the cart with the provided userId.
 	 * @param {string} userId - userId of the cart
 	 * @returns {object} Object with the cart
 	 */
@@ -69,9 +69,9 @@ class CartService {
 	}
 
 	/**
-	 * Creates a cart with the provided data
-	 * @param {*} data - data of the cart
-	 * @returns {Object} Object with the cart created
+	 * Creates a cart with the provided data.
+	 * @param {object} data - data of the cart
+	 * @returns {object} Object with the cart created
 	 */
 	async create(data) {
 		const cart = await models.Cart.create(data);
@@ -79,10 +79,10 @@ class CartService {
 	}
 
 	/**
-	 * Updates the cart with the provided id
+	 * Updates the cart with the provided id.
 	 * @param {string} id - id of the cart
-	 * @param {*} changes - data of the cart
-	 * @returns {Object} Object with the cart updated
+	 * @param {object} changes - data of the cart
+	 * @returns {object} Object with the cart updated
 	 */
 	async update(id, changes) {
 		const cart = await this.findOne(id);
@@ -91,9 +91,9 @@ class CartService {
 	}
 
 	/**
-	 * Deletes the cart with the provided id
+	 * Deletes the cart with the provided id.
 	 * @param {string} id - id of the cart
-	 * @returns {Object} Object with the cart deleted
+	 * @returns {object} Object with the cart deleted
 	 */
 	async delete(id) {
 		const cart = this.findOne(id);

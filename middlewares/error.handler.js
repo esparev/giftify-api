@@ -1,7 +1,7 @@
 const { ValidationError } = require('sequelize');
 
 /**
- * Handles the general application errors and sends them to the client
+ * Handles the general application errors and sends them to the client.
  */
 function errorHandler(err, req, res, next) {
 	res.status(500).json({
@@ -11,7 +11,7 @@ function errorHandler(err, req, res, next) {
 }
 
 /**
- * Handles the application errors of type boom and sends them to the client
+ * Handles the application errors of type boom and sends them to the client.
  */
 function boomErrorHandler(err, req, res, next) {
 	if (err.isBoom) {
@@ -23,7 +23,7 @@ function boomErrorHandler(err, req, res, next) {
 }
 
 /**
- * Handles the application errors of type Sequelize and sends them to the client
+ * Handles the application errors of type Sequelize and sends them to the client.
  */
 function ormErrorHandler(err, req, res, next) {
 	if (err instanceof ValidationError) {

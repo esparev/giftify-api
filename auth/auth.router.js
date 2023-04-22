@@ -10,7 +10,7 @@ router.post('/recover', recover);
 router.post('/change-password', changePassword);
 
 /**
- * Login function to authenticate the user by signing a token
+ * Login function to authenticate the user by signing a token.
  */
 async function login(req, res, next) {
 	try {
@@ -22,7 +22,7 @@ async function login(req, res, next) {
 }
 
 /**
- * Sends an email to the user with a link to recover the password
+ * Sends an email to the user with a link to recover the password.
  */
 async function recover(req, res, next) {
 	try {
@@ -35,7 +35,7 @@ async function recover(req, res, next) {
 }
 
 /**
- * Changes the user's password with the recovery token
+ * Changes the user's password with the recovery token.
  */
 async function changePassword(req, res, next) {
 	try {

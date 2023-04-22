@@ -3,15 +3,15 @@ const OrderService = require('../../services/order.service');
 const service = new OrderService();
 
 /**
- * Finds all orders in the array of objects
- * @returns {Array} Array with all orders
+ * Finds all orders in the array of objects.
+ * @returns {array} Array with all orders
  */
 const orders = () => {
 	return service.find();
 };
 
 /**
- * Finds the order with the provided id
+ * Finds the order with the provided id.
  * @param {id} id - id of the order
  * @returns {object} Object with the order
  */
@@ -24,7 +24,7 @@ const order = async (_, { id }, context) => {
 };
 
 /**
- * Creates a gift with the provided data
+ * Creates a gift with the provided data.
  * @param {object} data - data of the gift
  * @returns {object} Object with the gift created
  */
@@ -37,7 +37,7 @@ const createOrder = async (_, { data }, context) => {
 };
 
 /**
- * Updates the order with the provided id
+ * Updates the order with the provided id.
  * @param {object} params - id and data of the order
  * @param {string} params.id - id of the order
  * @param {object} params.data - data of the order
@@ -52,7 +52,7 @@ const updateOrder = async (_, { id, data }, context) => {
 };
 
 /**
- * Deletes the order with the provided id
+ * Deletes the order with the provided id.
  * @param {string} id - id of the order
  * @returns {object} Object with the order deleted
  */

@@ -7,7 +7,7 @@ const { buildContext } = require('graphql-passport');
 const resolvers = require('./resolvers/resolvers');
 
 /**
- * Configure the GraphQL server
+ * Configure the GraphQL server.
  * @param {*} app - Express app
  */
 const useGraphQL = async (app) => {
