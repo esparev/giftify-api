@@ -33,7 +33,7 @@ class AddressService {
 	 * @returns {array} Array with all addresses
 	 */
 	async find() {
-		const addresses = await models.Address.findAll();
+		const addresses = await models.Address.findAll({ include: ['user'] });
 		return addresses;
 	}
 
