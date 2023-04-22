@@ -7,10 +7,21 @@ const service = new OrderService();
  * Finds all orders in the array of objects.
  * @returns {array} Array with all orders
  */
-const orders = async (_, {}, context) => {
+const allOrders = async (_, {}, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin']);
 	return service.find();
+};
+
+/**
+ * Finds all user orders in the array of objects.
+ * @param {string} userId - id of the user
+ * @returns {array} Array with all orders
+ */
+const orders = async (_, { userId }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
+	return service.findByUser(userId);
 };
 
 /**
@@ -60,4 +71,11 @@ const deleteOrder = async (_, { id }, context) => {
 	return id;
 };
 
-module.exports = { orders, order, createOrder, updateOrder, deleteOrder };
+module.exports = {
+	order,
+	orders,
+	allOrders,
+	createOrder,
+	updateOrder,
+	deleteOrder,
+};

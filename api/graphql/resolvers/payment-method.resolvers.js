@@ -7,10 +7,20 @@ const service = new PaymentMethodService();
  * Finds all payment methods in the array of objects.
  * @returns {array} Array with all payment methods
  */
-const paymentMethods = async (_, {}, context) => {
+const allPaymentMethods = async (_, {}, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin']);
 	return service.find();
+};
+
+/**
+ * Finds all user payment methods in the array of objects.
+ * @returns {array} Array with all payment methods
+ */
+const paymentMethods = async (_, { userId }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
+	return service.findByUser(userId);
 };
 
 /**
@@ -61,8 +71,9 @@ const deletePaymentMethod = async (_, { id }, context) => {
 };
 
 module.exports = {
-	paymentMethods,
 	paymentMethod,
+	paymentMethods,
+	allPaymentMethods,
 	createPaymentMethod,
 	updatePaymentMethod,
 	deletePaymentMethod,

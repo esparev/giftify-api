@@ -7,15 +7,26 @@ const service = new AddressService();
  * Finds all addresses in the array of objects.
  * @returns {array} Array with all addresses
  */
-const addresses = async (_, {}, context) => {
+const allAddresses = async (_, {}, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin']);
 	return service.find();
 };
 
 /**
+ * Finds all user addresses in the array of objects.
+ * @param {string} userId - id of the user
+ * @returns {array} Array with all addresses
+ */
+const addresses = async (_, {userId}, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
+	return service.findByUser(userId);
+};
+
+/**
  * Finds the address with the provided id.
- * @param {id} id - id of the address
+ * @param {string} id - id of the address
  * @returns {object} Object with the address
  */
 const address = async (_, { id }, context) => {
@@ -60,4 +71,11 @@ const deleteAddress = async (_, { id }, context) => {
 	return id;
 };
 
-module.exports = { addresses, address, createAddress, updateAddress, deleteAddress };
+module.exports = {
+	address,
+	addresses,
+	allAddresses,
+	createAddress,
+	updateAddress,
+	deleteAddress,
+};

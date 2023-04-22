@@ -3,7 +3,8 @@ scalar DateTime
 
 type Query {
   paymentMethod(id: UUID!): PaymentMethod
-  paymentMethods: [PaymentMethod!]!
+  paymentMethods(userId: UUID!): [PaymentMethod!]!
+  allPaymentMethods: [PaymentMethod!]!
 }
 
 type Mutation {
