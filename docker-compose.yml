@@ -14,7 +14,7 @@ services:
       - ${DB_PORT}:${DB_PORT}
     # add persistency to the container
     volumes:
-      - /giftify_db:/var/lib/postgresql/data
+      - ./giftify_db:/var/lib/postgresql/data
   # pgadmin service
   pgadmin:
     image: dpage/pgadmin4
