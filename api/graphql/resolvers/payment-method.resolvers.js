@@ -1,5 +1,6 @@
 const checkJwt = require('../../../utils/checkJwt');
 const checkRole = require('../../../utils/checkRole');
+const { belongsToUserById } = require('../../../utils/belongsToUser');
 const PaymentMethodService = require('../../services/payment-method.service');
 const service = new PaymentMethodService();
 
@@ -20,6 +21,7 @@ const allPaymentMethods = async (_, {}, context) => {
 const paymentMethods = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin', 'user']);
+	belongsToUserById(user, userId);
 	return service.findByUser(userId);
 };
 

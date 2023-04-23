@@ -1,5 +1,6 @@
 const checkJwt = require('../../../utils/checkJwt');
 const checkRole = require('../../../utils/checkRole');
+const { belongsToUserById } = require('../../../utils/belongsToUser');
 const AddressService = require('../../services/address.service');
 const service = new AddressService();
 
@@ -18,9 +19,10 @@ const allAddresses = async (_, {}, context) => {
  * @param {string} userId - id of the user
  * @returns {array} Array with all addresses
  */
-const addresses = async (_, {userId}, context) => {
+const addresses = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin', 'user']);
+	belongsToUserById(user, userId);
 	return service.findByUser(userId);
 };
 

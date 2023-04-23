@@ -1,5 +1,6 @@
 const checkJwt = require('../../../utils/checkJwt');
 const checkRole = require('../../../utils/checkRole');
+const { belongsToUserById } = require('../../../utils/belongsToUser');
 const OrderService = require('../../services/order.service');
 const service = new OrderService();
 
@@ -21,6 +22,7 @@ const allOrders = async (_, {}, context) => {
 const orders = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin', 'user']);
+	belongsToUserById(user, userId);
 	return service.findByUser(userId);
 };
 

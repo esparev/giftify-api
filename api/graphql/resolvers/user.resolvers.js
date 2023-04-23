@@ -1,5 +1,6 @@
 const checkJwt = require('../../../utils/checkJwt');
 const checkRole = require('../../../utils/checkRole');
+const { belongsToUser } = require('../../../utils/belongsToUser');
 const UserService = require('../../services/user.service');
 const service = new UserService();
 
@@ -21,6 +22,7 @@ const users = async (_, {}, context) => {
 const user = async (_, { username }, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin', 'user']);
+	belongsToUser(user, username);
 	return service.findByUsername(username);
 };
 
@@ -43,6 +45,7 @@ const createUser = (_, { data }) => {
 const updateUser = async (_, { username, data }, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin', 'user']);
+	belongsToUser(user, username);
 	return service.update(username, data);
 };
 
@@ -54,6 +57,7 @@ const updateUser = async (_, { username, data }, context) => {
 const deleteUser = async (_, { username }, context) => {
 	const user = await checkJwt(context);
 	checkRole(user, ['admin', 'user']);
+	belongsToUser(user, username);
 	await service.delete(username);
 	return username;
 };
