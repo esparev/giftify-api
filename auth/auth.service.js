@@ -97,7 +97,7 @@ class AuthService {
 		const payload = { sub: user.id };
 		const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '15m' });
 		const link = `https://giftify.netlify.app/recuperar?token=${token}`;
-		await service.update(user.slug, { recoveryToken: token });
+		await service.update(user.username, { recoveryToken: token });
 
 		const mail = {
 			from: `Giftify <${config.smtpEmail}>`,

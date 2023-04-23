@@ -43,6 +43,28 @@ describe('tests for /auth path', () => {
 		});
 	});
 
+	describe('POST /recover', () => {
+		test('should return a 200 email sent', async () => {
+			const user = await models.User.findOne({
+				where: { username: 'esparev' },
+			});
+			const inputData = { email: user.email };
+			const { statusCode, body } = await api
+				.post('/api/v1/auth/recover')
+				.send(inputData);
+			expect(statusCode).toBe(200);
+			expect(body.message).toEqual('mail enviado');
+		});
+
+		test('should return a 401 recover not authorized', async () => {
+			const inputData = { email: 'fake@mail.com' };
+			const { statusCode } = await api
+				.post('/api/v1/auth/recover')
+				.send(inputData);
+			expect(statusCode).toBe(401);
+		});
+	});
+
 	afterAll(() => {
 		server.close();
 	});
