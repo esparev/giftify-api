@@ -85,13 +85,7 @@ class UserService {
 	 * @returns {object} Object with the user
 	 */
 	async findByEmail(email) {
-		const user = await models.User.findOne({
-			where: { email },
-			include: ['addresses', 'paymentMethods', 'orders', 'cart'],
-		});
-		if (!user) {
-			throw boom.notFound('User not found');
-		}
+		const user = await models.User.findOne({ where: { email } });
 		return user;
 	}
 

@@ -38,9 +38,9 @@ const createApp = () => {
 		await useGraphQL(app);
 	})();
 
-	app.use(errorHandler);
-	app.use(ormErrorHandler);
 	app.use(boomErrorHandler);
+	app.use(ormErrorHandler);
+	app.use(errorHandler);
 
 	return app;
 };
