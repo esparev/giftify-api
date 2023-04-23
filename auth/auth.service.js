@@ -132,7 +132,7 @@ class AuthService {
 			}
 
 			const hash = await bcrypt.hash(newPassword, 13);
-			await service.update(user.slug, { recoveryToken: null, password: hash });
+			await service.update(user.username, { recoveryToken: null, password: hash });
 
 			return { message: 'Contraseña modificada' };
 		} catch (error) {

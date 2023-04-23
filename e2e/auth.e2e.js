@@ -65,6 +65,34 @@ describe('tests for /auth path', () => {
 		});
 	});
 
+	describe('POST /change-password', () => {
+		test('should return a 200 password changed', async () => {
+			const user = await models.User.findOne({
+				where: { username: 'esparev' },
+			});
+			const inputData = {
+				token: user.recoveryToken,
+				newPassword: 'password123',
+			};
+			const { statusCode, body } = await api
+				.post('/api/v1/auth/change-password')
+				.send(inputData);
+			expect(statusCode).toBe(200);
+			expect(body.message).toEqual('Contraseña modificada');
+		});
+
+		test('should return a 401 change password not authorized', async () => {
+			const inputData = {
+				token: 'fakeToken',
+				newPassword: 'newPassword123',
+			};
+			const { statusCode } = await api
+				.post('/api/v1/auth/change-password')
+				.send(inputData);
+			expect(statusCode).toBe(401);
+		});
+	});
+
 	afterAll(() => {
 		server.close();
 	});
