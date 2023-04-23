@@ -2,7 +2,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
 
 /**
- * Payment Method Service class to manage the logic of the payment methods
+ * Payment Method Service class to manage the logic of the payment methods.
  *
  * #### Example
  *
@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the payment method with the provided id
  * service.findOne(id);
+ * // Finds all payment methods with the provided userId
+ * service.findByUser(userId);
  * // Creates a payment method with the provided data
  * service.create(data);
  * // Updates the payment method with the provided id
@@ -27,8 +29,8 @@ const { models } = require('../db/sequelize');
  */
 class PaymentMethodService {
 	/**
-	 * Finds all payment methods in the array of objects
-	 * @returns {Array} Array with all payment methods
+	 * Finds all payment methods in the array of objects.
+	 * @returns {array} Array with all payment methods
 	 */
 	async find() {
 		const paymentMethods = await models.PaymentMethod.findAll();
@@ -36,9 +38,9 @@ class PaymentMethodService {
 	}
 
 	/**
-	 * Finds the payment method with the provided id
-	 * @param {id} id - id of the payment method
-	 * @returns {Object} Object with the payment method
+	 * Finds the payment method with the provided id.
+	 * @param {string} id - id of the payment method
+	 * @returns {object} Object with the payment method
 	 */
 	async findOne(id) {
 		const paymentMethod = await models.PaymentMethod.findByPk(id, {
@@ -51,9 +53,22 @@ class PaymentMethodService {
 	}
 
 	/**
-	 * Creates a payment method with the provided data
-	 * @param {*} data - data of the payment method
-	 * @returns {Object} Object with the payment method created
+	 * Finds the paymentMethods with the provided userId.
+	 * @param {string} userId - userId of the paymentMethods
+	 * @returns {array} Array with all paymentMethods
+	 */
+	async findByUser(userId) {
+		const paymentMethods = await models.PaymentMethod.findAll({
+			where: { userId },
+			include: ['user'],
+		});
+		return paymentMethods;
+	}
+
+	/**
+	 * Creates a payment method with the provided data.
+	 * @param {object} data - data of the payment method
+	 * @returns {object} Object with the payment method created
 	 */
 	async create(data) {
 		const paymentMethod = await models.PaymentMethod.create(data);
@@ -61,10 +76,10 @@ class PaymentMethodService {
 	}
 
 	/**
-	 * Updates the payment method with the provided id
-	 * @param {id} id - id of the payment method
-	 * @param {*} changes - data of the payment method
-	 * @returns {Object} Object with the payment method updated
+	 * Updates the payment method with the provided id.
+	 * @param {string} id - id of the payment method
+	 * @param {object} changes - data of the payment method
+	 * @returns {object} Object with the payment method updated
 	 */
 	async update(id, changes) {
 		const paymentMethod = await this.findOne(id);
@@ -73,9 +88,9 @@ class PaymentMethodService {
 	}
 
 	/**
-	 * Deletes the payment method with the provided id
-	 * @param {id} id - id of the payment method
-	 * @returns {Object} Object with the payment method deleted
+	 * Deletes the payment method with the provided id.
+	 * @param {string} id - id of the payment method
+	 * @returns {object} Object with the payment method deleted
 	 */
 	async delete(id) {
 		const paymentMethod = await this.findOne(id);

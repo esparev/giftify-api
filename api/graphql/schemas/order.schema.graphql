@@ -3,7 +3,8 @@ scalar DateTime
 
 type Query {
   order(id: UUID!): Order
-  orders: [Order!]!
+  orders(userId: UUID!): [Order!]!
+  allOrders: [Order!]!
 }
 
 type Mutation {
@@ -24,7 +25,7 @@ type Order {
 }
 
 input CreateOrder {
-  id: UUID!
+  id: UUID
   total: Float!
   status: String!
   userId: UUID!

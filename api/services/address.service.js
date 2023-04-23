@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the address with the provided id
  * service.findOne(id);
+ * // Finds all addresses with the provided userId
+ * service.findByUser(userId);
  * // Creates a address with the provided data
  * service.create(data);
  * // Updates the address with the provided id
@@ -28,17 +30,17 @@ const { models } = require('../db/sequelize');
 class AddressService {
 	/**
 	 * Finds all addresses in the array of objects
-	 * @returns {Array} Array with all addresses
+	 * @returns {array} Array with all addresses
 	 */
 	async find() {
-		const addresses = await models.Address.findAll();
+		const addresses = await models.Address.findAll({ include: ['user'] });
 		return addresses;
 	}
 
 	/**
 	 * Finds the address with the provided id
-	 * @param {id} id - id of the address
-	 * @returns {Object} Object with the address
+	 * @param {string} id - id of the address
+	 * @returns {object} Object with the address
 	 */
 	async findOne(id) {
 		const address = await models.Address.findByPk(id, {
@@ -51,9 +53,22 @@ class AddressService {
 	}
 
 	/**
+	 * Finds the addresses with the provided userId
+	 * @param {string} userId - userId of the addresses
+	 * @returns {array} Array with all addresses
+	 */
+	async findByUser(userId) {
+		const addresses = await models.Address.findAll({
+			where: { userId },
+			include: ['user'],
+		});
+		return addresses;
+	}
+
+	/**
 	 * Creates a address with the provided data
-	 * @param {*} data - data of the address
-	 * @returns {Object} Object with the address created
+	 * @param {object} data - data of the address
+	 * @returns {object} Object with the address created
 	 */
 	async create(data) {
 		const address = await models.Address.create(data);
@@ -62,9 +77,9 @@ class AddressService {
 
 	/**
 	 * Updates the address with the provided id
-	 * @param {id} id - id of the address
-	 * @param {*} changes - data of the address
-	 * @returns {Object} Object with the address updated
+	 * @param {string} id - id of the address
+	 * @param {object} changes - data of the address
+	 * @returns {object} Object with the address updated
 	 */
 	async update(id, changes) {
 		const address = await this.findOne(id);
@@ -74,8 +89,8 @@ class AddressService {
 
 	/**
 	 * Deletes the address with the provided id
-	 * @param {id} id - id of the address
-	 * @returns {Object} Object with the address deleted
+	 * @param {string} id - id of the address
+	 * @returns {object} Object with the address deleted
 	 */
 	async delete(id) {
 		const address = await this.findOne(id);

@@ -4,7 +4,8 @@ scalar PostalCode
 
 type Query {
   address(id: UUID!): Address
-  addresses: [Address!]!
+  addresses(userId: UUID!): [Address!]!
+  allAddresses: [Address!]!
 }
 
 type Mutation {
@@ -28,7 +29,7 @@ type Address {
 }
 
 input CreateAddress {
-  id: UUID!
+  id: UUID
   streetName: String!
   streetNumber: String!
   postalCode: PostalCode!

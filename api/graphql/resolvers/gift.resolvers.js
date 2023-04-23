@@ -1,48 +1,57 @@
+const checkJwt = require('../../../utils/checkJwt');
+const checkRole = require('../../../utils/checkRole');
 const GiftService = require('../../services/gift.service');
 const service = new GiftService();
 
 /**
- * Finds all gifts in the array of objects
- * @returns {Array} Array with all gifts
+ * Finds all gifts in the array of objects.
+ * @returns {array} Array with all gifts
  */
 const gifts = () => {
 	return service.find();
 };
 
 /**
- * Finds the gift with the provided id
+ * Finds the gift with the provided id.
  * @param {id} id - id of the gift
- * @returns {Object} Object with the gift
+ * @returns {object} Object with the gift
  */
 const gift = (_, { id }) => {
 	return service.findOne(id);
 };
 
 /**
- * Creates a gift with the provided data
- * @param {*} data - data of the gift
- * @returns {Object} Object with the gift created
+ * Creates a gift with the provided data.
+ * @param {object} data - data of the gift
+ * @returns {object} Object with the gift created
  */
-const createGift = (_, { data }) => {
+const createGift = async (_, { data }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.create(data);
 };
 
 /**
- * Updates the gift with the provided id
- * @param {id} id - id of the gift
- * @param {data} changes - data of the gift
- * @returns {Object} Object with the gift updated
+ * Updates the gift with the provided id.
+ * @param {object} params - id and data of the gift
+ * @param {string} params.id - id of the gift
+ * @param {object} params.data - data of the gift
+ * @returns {object} Object with the gift updated
  */
-const updateGift = (_, { id, data }) => {
+const updateGift = async (_, { id, data }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	return service.update(id, data);
 };
 
 /**
- * Deletes the gift with the provided id
- * @param {id} id - id of the gift
- * @returns {Object} Object with the gift deleted
+ * Deletes the gift with the provided id.
+ * @param {string} id - id of the gift
+ * @returns {object} Object with the gift deleted
  */
-const deleteGift = async (_, { id }) => {
+const deleteGift = async (_, { id }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin']);
 	await service.delete(id);
 	return id;
 };

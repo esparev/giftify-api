@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 /**
- * @description Description of each environment variable
+ * Description of each environment variable.
  * @property {string} env - Runtime environment || dev
  * @property {boolean} isProd - Indicates if the app is running in production
  * @property {number} port - Listening port

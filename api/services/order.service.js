@@ -2,7 +2,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
 
 /**
- * Order Service class to manage the logic of the orders
+ * Order Service class to manage the logic of the orders.
  *
  * #### Example
  *
@@ -17,6 +17,8 @@ const { models } = require('../db/sequelize');
  * service.find();
  * // Finds the order with the provided id
  * service.findOne(id);
+ * // Finds all orders with the provided userId
+ * service.findByUser(userId);
  * // Creates an order with the provided data
  * service.create(data);
  * // Updates the order with the provided id
@@ -27,8 +29,8 @@ const { models } = require('../db/sequelize');
  */
 class OrderService {
 	/**
-	 * Finds all orders in the array of objects
-	 * @returns {Array} Array with all orders
+	 * Finds all orders in the array of objects.
+	 * @returns {array} Array with all orders
 	 */
 	async find() {
 		const orders = await models.Order.findAll();
@@ -36,9 +38,9 @@ class OrderService {
 	}
 
 	/**
-	 * Finds the order with the provided id
-	 * @param {id} id - id of the order
-	 * @returns {Object} Object with the order
+	 * Finds the order with the provided id.
+	 * @param {string} id - id of the order
+	 * @returns {object} Object with the order
 	 */
 	async findOne(id) {
 		const order = await models.Order.findByPk(id, {
@@ -51,9 +53,22 @@ class OrderService {
 	}
 
 	/**
-	 * Creates a order with the provided data
-	 * @param {*} data - data of the order
-	 * @returns {Object} Object with the order created
+	 * Finds the orders with the provided userId.
+	 * @param {string} userId - userId of the orders
+	 * @returns {array} Array with all orders
+	 */
+	async findByUser(userId) {
+		const orders = await models.Order.findAll({
+			where: { userId },
+			include: ['user'],
+		});
+		return orders;
+	}
+
+	/**
+	 * Creates a order with the provided data.
+	 * @param {object} data - data of the order
+	 * @returns {object} Object with the order created
 	 */
 	async create(data) {
 		const order = await models.Order.create(data);
@@ -61,10 +76,10 @@ class OrderService {
 	}
 
 	/**
-	 * Updates the order with the provided id
-	 * @param {id} id - id of the order
-	 * @param {*} changes - data of the order
-	 * @returns {Object} Object with the order updated
+	 * Updates the order with the provided id.
+	 * @param {string} id - id of the order
+	 * @param {object} changes - data of the order
+	 * @returns {object} Object with the order updated
 	 */
 	async update(id, changes) {
 		const order = await this.findOne(id);
@@ -73,9 +88,9 @@ class OrderService {
 	}
 
 	/**
-	 * Deletes the order with the provided id
-	 * @param {id} id - id of the order
-	 * @returns {Object} Object with the order deleted
+	 * Deletes the order with the provided id.
+	 * @param {string} id - id of the order
+	 * @returns {object} Object with the order deleted
 	 */
 	async delete(id) {
 		const order = await this.findOne(id);

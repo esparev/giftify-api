@@ -1,5 +1,5 @@
 /**
- * Defines the options for the sequelize configuration model
+ * Defines the options for the sequelize configuration model.
  * 
  * #### Example
  * 
@@ -10,10 +10,10 @@
  * const options = modelOptions(false, 'Gift', GIFT_TABLE);
  * ```
  * 
- * @param {boolean} timestamp If the model should have timestamps
- * @param {string} modelName The model name
- * @param {string} tableName The table name
- * @returns {object} The model options
+ * @param {boolean} timestamp - if the model should have timestamps
+ * @param {string} modelName - the model name
+ * @param {string} tableName - the table name
+ * @returns {object} the model's options
  */
 const modelOptions = (timestamp, modelName, tableName) => {
 	return {
