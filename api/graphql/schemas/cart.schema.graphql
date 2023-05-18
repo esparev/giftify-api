@@ -3,6 +3,7 @@ scalar DateTime
 
 type Query {
   cart(id: UUID!): Cart
+  userCart(userId: UUID!): Cart
   carts: [Cart!]!
 }
 

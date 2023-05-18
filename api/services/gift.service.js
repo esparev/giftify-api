@@ -19,6 +19,8 @@ const { models } = require('../db/sequelize');
  * service.findOne(id);
  * // Creates a gift with the provided data
  * service.create(data);
+ * // Adds a gift to the cart
+ * service.addToCart(data);
  * // Updates the gift with the provided id
  * service.update(id, changes);
  * // Deletes the gift with the provided id
@@ -58,6 +60,15 @@ class GiftService {
 	async create(data) {
 		const gift = await models.Gift.create(data);
 		return gift;
+	}
+
+	/**
+	 * Adds a gift to the cart.
+	 * @param {object} data
+	 */
+	async addToCart(data) {
+		const cartItem = await models.CartItem.create(data);
+		return cartItem;
 	}
 
 	/**

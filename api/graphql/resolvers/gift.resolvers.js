@@ -32,6 +32,17 @@ const createGift = async (_, { data }, context) => {
 };
 
 /**
+ * Adds a gift to the cart.
+ * @param {object} data - data of the item to add to the cart
+ * @returns {object} Object with the gift added to the cart
+ */
+const addToCart = async (_, { data }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
+	return service.addToCart(data);
+};
+
+/**
  * Updates the gift with the provided id.
  * @param {object} params - id and data of the gift
  * @param {string} params.id - id of the gift
@@ -56,4 +67,4 @@ const deleteGift = async (_, { id }, context) => {
 	return id;
 };
 
-module.exports = { gifts, gift, createGift, updateGift, deleteGift };
+module.exports = { gifts, gift, createGift, addToCart, updateGift, deleteGift };
