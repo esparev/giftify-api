@@ -1,5 +1,7 @@
 const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
 const { models } = require('../db/sequelize');
+const checkNetwork = require('../../utils/checkNetwork');
 
 /**
  * Payment Method Service class to manage the logic of the payment methods.
@@ -71,7 +73,22 @@ class PaymentMethodService {
 	 * @returns {object} Object with the payment method created
 	 */
 	async create(data) {
-		const paymentMethod = await models.PaymentMethod.create(data);
+		const hashedNumber = await bcrypt.hash(data.number, 13);
+		const hashedCvv = await bcrypt.hash(data.cvv, 13);
+		const last4 = data.number.slice(-4);
+		const network = checkNetwork(data.number);
+
+		const paymentMethod = await models.PaymentMethod.create({
+			...data,
+			last4: last4,
+			number: hashedNumber,
+			network: network,
+			cvv: hashedCvv,
+		});
+
+		delete paymentMethod.dataValues.number;
+		delete paymentMethod.dataValues.cvv;
+
 		return paymentMethod;
 	}
 

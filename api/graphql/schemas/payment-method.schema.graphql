@@ -17,12 +17,10 @@ type PaymentMethod {
   id: UUID!
   alias: String!
   cardholderName: String!
-  number: String!
   last4: String!
   network: String!
   expiryMonth: Int!
   expiryYear: Int!
-  cvv: String!
   createdAt: DateTime!
   user: User!
 }
@@ -32,8 +30,8 @@ input CreatePaymentMethod {
   alias: String!
   cardholderName: String!
   number: String!
-  last4: String!
-  network: String!
+  last4: String
+  network: String
   expiryMonth: Int!
   expiryYear: Int!
   cvv: String!
