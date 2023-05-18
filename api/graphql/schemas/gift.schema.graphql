@@ -4,6 +4,8 @@ scalar DateTime
 
 type Query {
   gift(id: UUID!): Gift
+  giftsByCategory(category: String!): [Gift!]
+  giftsBySearchInput(searchInput: String!): [Gift!]
   gifts: [Gift!]!
 }
 
