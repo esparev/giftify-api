@@ -12,6 +12,24 @@ const gifts = () => {
 };
 
 /**
+ * Finds all gifts in the array of objects with the provided category.
+ * @param {string} category
+ * @returns {array} Array with all the filtered gifts
+ */
+const giftsByCategory = (_, { category }) => {
+	return service.findByCategory(category);
+};
+
+/**
+ * Finds all gifts in the array of objects with the provided search input.
+ * @param {*} searchInput
+ * @returns {array} Array with all the filtered gifts
+ */
+const giftsBySearchInput = (_, { searchInput }) => {
+	return service.findBySearchInput(searchInput);
+};
+
+/**
  * Finds the gift with the provided id.
  * @param {id} id - id of the gift
  * @returns {object} Object with the gift
@@ -67,4 +85,13 @@ const deleteGift = async (_, { id }, context) => {
 	return id;
 };
 
-module.exports = { gifts, gift, createGift, addToCart, updateGift, deleteGift };
+module.exports = {
+	gifts,
+	giftsByCategory,
+	giftsBySearchInput,
+	gift,
+	addToCart,
+	createGift,
+	updateGift,
+	deleteGift,
+};

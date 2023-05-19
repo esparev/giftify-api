@@ -15,6 +15,10 @@ const { models } = require('../db/sequelize');
  * ```javascript
  * // Finds all gifts in the array of objects
  * service.find();
+ * // Finds all gifts in the array of objects with the provided category
+ * service.findByCategory(category);
+ * // Finds all gifts in the array of objects with the provided search input
+ * service.findBySearchInput(searchInput);
  * // Finds the gift with the provided id
  * service.findOne(id);
  * // Creates a gift with the provided data
@@ -35,6 +39,32 @@ class GiftService {
 	async find() {
 		const gifts = await models.Gift.findAll({ include: ['category'] });
 		return gifts;
+	}
+
+	/**
+	 * Finds all gifts in the array of objects with the provided category.
+	 * @param {string} category - category of the gift
+	 * @returns {array} Array with all the filtered gifts
+	 */
+	async findByCategory(category) {
+		const gifts = await models.Gift.findAll({ include: ['category'] });
+		const filteredGifts = gifts.filter(
+			(gift) => gift.category.name === category
+		);
+		return filteredGifts;
+	}
+
+	/**
+	 * Finds all gifts in the array of objects with the provided search input.
+	 * @param {string} searchInput
+	 * @returns {array} Array with all the filtered gifts
+	 */
+	async findBySearchInput(searchInput) {
+		const gifts = await models.Gift.findAll({ include: ['category'] });
+		const filteredGifts = gifts.filter((gift) =>
+			gift.name.toLowerCase().includes(searchInput.toLowerCase())
+		);
+		return filteredGifts;
 	}
 
 	/**

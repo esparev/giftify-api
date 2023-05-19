@@ -20,6 +20,15 @@ const CategorySchema = {
 		allowNull: false,
 		type: DataTypes.STRING,
 	},
+	hexColor: {
+		allowNull: false,
+		field: 'hex_color',
+		type: DataTypes.STRING,
+	},
+	image: {
+		allowNull: true,
+		type: DataTypes.STRING,
+	},
 	createdAt: {
 		allowNull: false,
 		field: 'created_at',

@@ -1,32 +1,40 @@
+scalar URL
 scalar UUID
 scalar DateTime
+scalar HexColorCode
 
 type Query {
-  category(id: UUID!): Category
-  categories: [Category!]!
+	category(id: UUID!): Category
+	categories: [Category!]!
 }
 
 type Mutation {
-  createCategory(data: CreateCategory!): Category
-  updateCategory(slug: String!, data: UpdateCategory!): Category
-  deleteCategory(slug: String!): String
+	createCategory(data: CreateCategory!): Category
+	updateCategory(slug: String!, data: UpdateCategory!): Category
+	deleteCategory(slug: String!): String
 }
 
 type Category {
-  id: UUID!
-  slug: String!
-  name: String!
-  createdAt: DateTime!
-  gifts: [Gift!]!
+	id: UUID!
+	slug: String!
+	name: String!
+	hexColor: HexColorCode!
+	image: URL!
+	createdAt: DateTime!
+	gifts: [Gift!]!
 }
 
 input CreateCategory {
-  id: UUID
-  slug: String!
-  name: String!
+	id: UUID
+	slug: String!
+	name: String!
+	hexColor: HexColorCode!
+	image: URL
 }
 
 input UpdateCategory {
-  slug: String
-  name: String
+	slug: String
+	name: String
+	hexColor: HexColorCode
+	image: URL
 }
