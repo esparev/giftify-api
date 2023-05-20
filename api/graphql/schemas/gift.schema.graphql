@@ -10,7 +10,8 @@ type Query {
 }
 
 type Mutation {
-  addToCart(data: AddToCart!): Cart
+  addToCart(data: AddToCart!): CartItem
+  removeFromCart(data: RemoveFromCart!): UUID
   createGift(data: CreateGift!): Gift
   updateGift(id: UUID!, data: UpdateGift!): Gift
   deleteGift(id: UUID!): UUID
@@ -29,6 +30,14 @@ type Gift {
 }
 
 input AddToCart {
+  id: UUID
+  giftId: UUID!
+  cartId: UUID!
+  quantity: Int!
+}
+
+input RemoveFromCart {
+  id: UUID
   giftId: UUID!
   cartId: UUID!
   quantity: Int!

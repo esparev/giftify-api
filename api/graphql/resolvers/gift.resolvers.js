@@ -61,6 +61,17 @@ const addToCart = async (_, { data }, context) => {
 };
 
 /**
+ * Removes a gift from the cart.
+ * @param {object} data - data of the item to remove from the cart
+ * @returns {object} Object with the gift removed from the cart
+ */
+const removeFromCart = async (_, { data }, context) => {
+	const user = await checkJwt(context);
+	checkRole(user, ['admin', 'user']);
+	return service.removeFromCart(data);
+};
+
+/**
  * Updates the gift with the provided id.
  * @param {object} params - id and data of the gift
  * @param {string} params.id - id of the gift
@@ -91,6 +102,7 @@ module.exports = {
 	giftsBySearchInput,
 	gift,
 	addToCart,
+	removeFromCart,
 	createGift,
 	updateGift,
 	deleteGift,
