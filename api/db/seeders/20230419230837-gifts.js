@@ -11,7 +11,7 @@ module.exports = {
 				description:
 					'Un hermoso ramo de flores para demostrar tu amor y aprecio',
 				price: 35.99,
-				image: 'https://example.com/bouquet.jpg',
+				image: 'https://i.imgur.com/x0oqWO2.jpg',
 				rating: 4,
 				quantity: 10,
 				created_at: new Date().toISOString(),
@@ -24,7 +24,7 @@ module.exports = {
 				description:
 					'Una taza con una foto o mensaje personalizado para empezar el día con una sonrisa',
 				price: 14.99,
-				image: 'https://example.com/mug.jpg',
+				image: 'https://i.imgur.com/DZTwfHS.jpg',
 				rating: 5,
 				quantity: 20,
 				created_at: new Date().toISOString(),
@@ -36,7 +36,7 @@ module.exports = {
 				name: 'Collar de plata',
 				description: 'Un elegante collar de plata para resaltar su belleza',
 				price: 89.99,
-				image: 'https://example.com/necklace.jpg',
+				image: 'https://i.imgur.com/lawVlvw.jpg',
 				rating: 3,
 				quantity: 5,
 				created_at: new Date().toISOString(),
@@ -49,7 +49,7 @@ module.exports = {
 				description:
 					'Una billetera de cuero de alta calidad para llevar sus tarjetas y dinero en estilo',
 				price: 49.99,
-				image: 'https://example.com/wallet.jpg',
+				image: 'https://i.imgur.com/dAKFtzz.jpg',
 				rating: 4,
 				quantity: 8,
 				created_at: new Date().toISOString(),
@@ -62,7 +62,7 @@ module.exports = {
 				description:
 					'Una botella de vino tinto de alta calidad para celebrar ocasiones especiales',
 				price: 49.99,
-				image: 'https://example.com/wine.jpg',
+				image: 'https://i.imgur.com/a9p3BaA.jpg',
 				rating: 4,
 				quantity: 12,
 				created_at: new Date().toISOString(),
@@ -75,7 +75,7 @@ module.exports = {
 				description:
 					'Auriculares inalámbricos con cancelación de ruido para disfrutar de la música sin interrupciones',
 				price: 99.99,
-				image: 'https://example.com/headphones.jpg',
+				image: 'https://i.imgur.com/9FhWSJl.jpg',
 				rating: 5,
 				quantity: 7,
 				created_at: new Date().toISOString(),
@@ -88,7 +88,7 @@ module.exports = {
 				description:
 					'Un reloj de pulsera elegante y sofisticado para lucir en cualquier ocasión',
 				price: 149.99,
-				image: 'https://example.com/watch.jpg',
+				image: 'https://i.imgur.com/1on9Y3I.jpg',
 				rating: 4,
 				quantity: 3,
 				created_at: new Date().toISOString(),
@@ -101,7 +101,7 @@ module.exports = {
 				description:
 					'Un juego de mesa divertido para compartir con amigos y familiares',
 				price: 39.99,
-				image: 'https://example.com/boardgame.jpg',
+				image: 'https://i.imgur.com/ebcuAZj.jpg',
 				rating: 4,
 				quantity: 6,
 				created_at: new Date().toISOString(),
@@ -114,7 +114,7 @@ module.exports = {
 				description:
 					'Un bolso de mano elegante y práctico para llevar lo esencial a cualquier parte',
 				price: 79.99,
-				image: 'https://example.com/handbag.jpg',
+				image: 'https://i.imgur.com/De7N9V3.jpg',
 				rating: 3,
 				quantity: 4,
 				created_at: new Date().toISOString(),
@@ -127,7 +127,7 @@ module.exports = {
 				description:
 					'Una ramita de salvia para purificar el ambiente y limpiar energías negativas',
 				price: 7.99,
-				image: 'https://example.com/sage.jpg',
+				image: 'https://i.imgur.com/1N1HNtp.jpg',
 				rating: 5,
 				quantity: 20,
 				created_at: new Date().toISOString(),
