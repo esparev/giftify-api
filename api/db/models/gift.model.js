@@ -75,6 +75,7 @@ class Gift extends Model {
 	}
 
 	static associate(models) {
+		this.hasMany(models.CartItem, { as: 'gift', foreignKey: 'giftId' });
 		this.belongsTo(models.Category, { as: 'category' });
 		this.belongsToMany(models.Cart, {
 			as: 'carts',

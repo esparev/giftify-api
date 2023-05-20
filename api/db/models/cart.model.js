@@ -56,6 +56,7 @@ class Cart extends Model {
 	}
 
 	static associate(models) {
+		this.hasMany(models.CartItem, { as: 'cartItems', foreignKey: 'cartId' });
 		this.belongsTo(models.User, { as: 'user' });
 		this.belongsToMany(models.Gift, {
 			as: 'gifts',

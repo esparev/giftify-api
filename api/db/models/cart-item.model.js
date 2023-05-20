@@ -52,11 +52,23 @@ const CartItemSchema = {
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW,
 	},
+	cartItemsId: {
+		field: 'cart_items_id',
+		primaryKey: true,
+		allowNull: true,
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+	},
 };
 
 class CartItem extends Model {
 	static config(sequelize) {
 		return { sequelize, ...options };
+	}
+
+	static associate(models) {
+		this.belongsTo(models.Cart, { as: 'cartItems' });
+		this.belongsTo(models.Gift, { as: 'gift' });
 	}
 }
 

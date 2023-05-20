@@ -26,6 +26,7 @@ function setupModels(sequelize) {
   Gift.associate(sequelize.models);
   Cart.associate(sequelize.models);
   Order.associate(sequelize.models);
+  CartItem.associate(sequelize.models);
 }
 
 module.exports = setupModels;
