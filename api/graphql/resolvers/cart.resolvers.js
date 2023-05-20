@@ -1,4 +1,3 @@
-// @ts-check
 const checkJwt = require('../../../utils/checkJwt');
 const checkRole = require('../../../utils/checkRole');
 const CartService = require('../../services/cart.service');

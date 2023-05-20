@@ -20,6 +20,15 @@ type Cart {
   createdAt: DateTime!
   user: User!
   gifts: [Gift!]!
+  cartItems: [CartItem!]!
+}
+
+type CartItem {
+  id: UUID!
+  quantity: Int!
+  gift: Gift!
+  cart: Cart!
+  createdAt: DateTime!
 }
 
 input CreateCart {

@@ -60,7 +60,11 @@ class CartService {
 	async findByUser(userId) {
 		const cart = await models.Cart.findOne({
 			where: { userId },
-			include: ['user', 'gifts'],
+			include: ['user', 'gifts', {
+				model: models.CartItem,
+				as: 'cartItems',
+				include: ['gift'],
+			}],
 		});
 		if (!cart) {
 			throw boom.notFound('Cart not found');
