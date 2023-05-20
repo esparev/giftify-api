@@ -1,5 +1,7 @@
 const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
+const CartService = require('./cart.service');
+const cartService = new CartService();
 
 /**
  * Gift Service class to manage the logic of the gifts.
@@ -93,11 +95,65 @@ class GiftService {
 	}
 
 	/**
-	 * Adds a gift to the cart.
+	 * Adds a gift to the cart and updates the info on the cart.
 	 * @param {object} data
 	 */
 	async addToCart(data) {
-		const cartItem = await models.CartItem.create(data);
+		const gift = await this.findOne(data.giftId);
+		const cart = await cartService.findOne(data.cartId);
+		const cartItem = await models.CartItem.findOne({
+			where: { giftId: data.giftId, cartId: data.cartId },
+		});
+		let item;
+
+		if (cartItem) {
+			item = await cartItem.update({
+				quantity: cartItem.dataValues.quantity + data.quantity,
+			});
+		} else {
+			item = await models.CartItem.create(data);
+		}
+
+		const cartQuantity = cart.dataValues.quantity;
+		const cartTotal = cart.dataValues.total;
+		const giftPrice = gift.dataValues.price;
+
+		await cart.update({
+			quantity: cartQuantity + data.quantity,
+			total: cartTotal + giftPrice * data.quantity,
+		});
+
+		return item;
+	}
+
+	/**
+	 * Removes a gift from the cart and updates the info on the cart.
+	 * @param {object} data
+	 */
+	async removeFromCart(data) {
+		const gift = await this.findOne(data.giftId);
+		const cart = await cartService.findOne(data.cartId);
+		const cartItem = await models.CartItem.findOne({
+			where: { giftId: data.giftId, cartId: data.cartId },
+		});
+
+		const cartQuantity = cart.dataValues.quantity;
+		const cartTotal = cart.dataValues.total;
+		const giftPrice = gift.dataValues.price;
+
+		await cart.update({
+			quantity: cartQuantity - data.quantity,
+			total: cartTotal - giftPrice * data.quantity,
+		});
+
+		if (cartItem.dataValues.quantity > 1) {
+			await cartItem.update({
+				quantity: cartItem.dataValues.quantity - data.quantity,
+			});
+		} else {
+			await cartItem.destroy();
+		}
+
 		return cartItem;
 	}
 
