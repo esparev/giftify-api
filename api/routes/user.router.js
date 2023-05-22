@@ -38,7 +38,6 @@ const getUser = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
 	try {
-		checkRoles(['admin', 'user']);
 		const body = req.body;
 		const newUser = await service.create(body);
 		res.status(201).json({ newUser, message: 'user created' });
@@ -77,12 +76,7 @@ router.get(
 	validatorHandler(getUserSchema, 'params'),
 	getUser
 );
-router.post(
-	'/',
-	passport.authenticate('jwt', { session: false }),
-	validatorHandler(createUserSchema, 'body'),
-	createUser
-);
+router.post('/', validatorHandler(createUserSchema, 'body'), createUser);
 router.patch(
 	'/:username',
 	passport.authenticate('jwt', { session: false }),
