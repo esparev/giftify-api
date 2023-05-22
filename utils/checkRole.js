@@ -7,7 +7,7 @@ const boom = require('@hapi/boom');
  */
 function checkRole(user, roles) {
 	if (!roles.includes(user.role)) {
-		throw boom.unauthorized('No tienes permisos para realizar esta acción');
+		throw boom.forbidden('You do not have permissions to perform this action');
 	}
 }
 
