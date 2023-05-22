@@ -38,8 +38,18 @@ class GiftService {
 	 * Finds all gifts in the array of objects.
 	 * @returns {array} Array with all gifts
 	 */
-	async find() {
-		const gifts = await models.Gift.findAll({ include: ['category'] });
+	async find(query) {
+		let gifts = [];
+		const { category, searchInput } = query;
+
+		if (category) {
+			gifts = await this.findByCategory(category);
+		} else if (searchInput) {
+			gifts = await this.findBySearchInput(searchInput);
+		} else {
+			gifts = await models.Gift.findAll({ include: ['category'] });
+		}
+
 		return gifts;
 	}
 
@@ -51,7 +61,7 @@ class GiftService {
 	async findByCategory(category) {
 		const gifts = await models.Gift.findAll({ include: ['category'] });
 		const filteredGifts = gifts.filter(
-			(gift) => gift.category.name === category
+			(gift) => gift.category.slug === category
 		);
 		return filteredGifts;
 	}

@@ -15,7 +15,8 @@ const {
 
 const getGifts = async (req, res, next) => {
 	try {
-		const gifts = await service.find();
+		console.log(req.query.category);
+		const gifts = await service.find(req.query);
 		res.status(200).json(gifts);
 	} catch (error) {
 		next(error);
@@ -113,7 +114,7 @@ router.delete(
 	passport.authenticate('jwt', { session: false }),
 	deleteGift
 );
-router.delete(
+router.post(
 	'/remove-from-cart',
 	passport.authenticate('jwt', { session: false }),
 	removeFromCart
