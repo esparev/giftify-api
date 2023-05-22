@@ -78,7 +78,7 @@ router.patch(
 	'/:username',
 	passport.authenticate('jwt', { session: false }),
 	validatorHandler(getUserSchema, 'params'),
-	validatorHandler(updateUserSchema, 'params'),
+	validatorHandler(updateUserSchema, 'body'),
 	updateUser
 );
 router.delete(

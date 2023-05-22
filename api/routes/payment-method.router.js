@@ -115,7 +115,7 @@ router.patch(
 	'/:id',
 	passport.authenticate('jwt', { session: false }),
 	validatorHandler(getPaymentMethodSchema, 'params'),
-	validatorHandler(updatePaymentMethodSchema, 'params'),
+	validatorHandler(updatePaymentMethodSchema, 'body'),
 	updatePaymentMethod
 );
 router.delete(

@@ -109,7 +109,7 @@ router.patch(
 	'/:id',
 	passport.authenticate('jwt', { session: false }),
 	validatorHandler(getAddressSchema, 'params'),
-	validatorHandler(updateAddressSchema, 'params'),
+	validatorHandler(updateAddressSchema, 'body'),
 	updateAddress
 );
 router.delete(

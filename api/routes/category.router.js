@@ -78,7 +78,7 @@ router.patch(
 	'/:id',
 	passport.authenticate('jwt', { session: false }),
 	validatorHandler(getCategorySchema, 'params'),
-	validatorHandler(updateCategorySchema, 'params'),
+	validatorHandler(updateCategorySchema, 'body'),
 	updateCategory
 );
 router.delete(

@@ -105,7 +105,7 @@ router.patch(
 	'/:id',
 	passport.authenticate('jwt', { session: false }),
 	validatorHandler(getOrderSchema, 'params'),
-	validatorHandler(updateOrderSchema, 'params'),
+	validatorHandler(updateOrderSchema, 'body'),
 	updateOrder
 );
 router.delete(

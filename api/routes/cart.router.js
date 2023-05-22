@@ -105,7 +105,7 @@ router.patch(
 	'/:id',
 	passport.authenticate('jwt', { session: false }),
 	validatorHandler(getCartSchema, 'params'),
-	validatorHandler(updateCartSchema, 'params'),
+	validatorHandler(updateCartSchema, 'body'),
 	updateCart
 );
 router.delete(
