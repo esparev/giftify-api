@@ -40,12 +40,17 @@ class GiftService {
 	 */
 	async find(query) {
 		let gifts = [];
-		const { category, searchInput } = query;
+		
+		if (query) {
+			const { category, searchInput } = query;
 
-		if (category) {
-			gifts = await this.findByCategory(category);
-		} else if (searchInput) {
-			gifts = await this.findBySearchInput(searchInput);
+			if (category) {
+				gifts = await this.findByCategory(category);
+			} else if (searchInput) {
+				gifts = await this.findBySearchInput(searchInput);
+			} else {
+				gifts = await models.Gift.findAll({ include: ['category'] });
+			}
 		} else {
 			gifts = await models.Gift.findAll({ include: ['category'] });
 		}
