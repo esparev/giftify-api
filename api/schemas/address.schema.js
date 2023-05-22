@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 // Data rules
-const id = Joi.number().integer();
+const id = Joi.string().uuid({ version: 'uuidv4' });
 const streetName = Joi.string().max(100);
 const streetNumber = Joi.string().max(10);
 const postalCode = Joi.string().max(10);

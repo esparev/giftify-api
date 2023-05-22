@@ -13,7 +13,7 @@ const avatar = Joi.string().uri();
  * Schema to validate the getUser request
  */
 const getUserSchema = Joi.object({
-	id: id.required() || username.required(),
+	username: username.required(),
 });
 
 /**

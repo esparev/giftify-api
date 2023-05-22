@@ -10,16 +10,16 @@ const quantity = Joi.number().min(0);
 const categoryId = Joi.string().uuid({ version: 'uuidv4' });
 
 /**
- * Schema to validate the getProduct request
+ * Schema to validate the getGift request
  */
-const getProductSchema = Joi.object({
+const getGiftSchema = Joi.object({
 	id: id.required(),
 });
 
 /**
- * Schema to validate the createProduct request
+ * Schema to validate the createGift request
  */
-const createProductSchema = Joi.object({
+const createGiftSchema = Joi.object({
 	name: name.required(),
 	description: description.required(),
 	price: price.required(),
@@ -30,9 +30,9 @@ const createProductSchema = Joi.object({
 });
 
 /**
- * Schema to validate the updateProduct request
+ * Schema to validate the updateGift request
  */
-const updateProductSchema = Joi.object({
+const updateGiftSchema = Joi.object({
 	name,
 	description,
 	price,
@@ -41,4 +41,4 @@ const updateProductSchema = Joi.object({
 	quantity,
 });
 
-module.exports = { getProductSchema, createProductSchema, updateProductSchema };
+module.exports = { getGiftSchema, createGiftSchema, updateGiftSchema };
