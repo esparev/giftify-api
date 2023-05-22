@@ -6,7 +6,6 @@ const service = new UserService();
 
 /**
  * Finds all users in the array of objects.
- * @returns {array} Array with all users
  */
 const users = async (_, {}, context) => {
 	const user = await checkJwt(context);
@@ -16,8 +15,6 @@ const users = async (_, {}, context) => {
 
 /**
  * Finds the user with the provided username.
- * @param {string} username - username of the user
- * @returns {object} Object with the user
  */
 const user = async (_, { username }, context) => {
 	const user = await checkJwt(context);
@@ -28,8 +25,6 @@ const user = async (_, { username }, context) => {
 
 /**
  * Creates a user with the provided data.
- * @param {object} data - data of the user
- * @returns {object} Object with the user created
  */
 const createUser = (_, { data }) => {
 	return service.create(data);
@@ -37,10 +32,6 @@ const createUser = (_, { data }) => {
 
 /**
  * Updates the user with the provided username.
- * @param {object} params - username and data of the user
- * @param {string} params.username - username of the user
- * @param {object} params.data - data of the user
- * @returns {object} Object with the user updated
  */
 const updateUser = async (_, { username, data }, context) => {
 	const user = await checkJwt(context);
@@ -51,8 +42,6 @@ const updateUser = async (_, { username, data }, context) => {
 
 /**
  * Deletes the user with the provided username.
- * @param {string} params - username of the user
- * @returns {object} Object with the user deleted
  */
 const deleteUser = async (_, { username }, context) => {
 	const user = await checkJwt(context);

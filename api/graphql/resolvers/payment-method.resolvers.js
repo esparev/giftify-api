@@ -6,7 +6,6 @@ const service = new PaymentMethodService();
 
 /**
  * Finds all payment methods in the array of objects.
- * @returns {array} Array with all payment methods
  */
 const allPaymentMethods = async (_, {}, context) => {
 	const user = await checkJwt(context);
@@ -16,7 +15,6 @@ const allPaymentMethods = async (_, {}, context) => {
 
 /**
  * Finds all user payment methods in the array of objects.
- * @returns {array} Array with all payment methods
  */
 const paymentMethods = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
@@ -27,8 +25,6 @@ const paymentMethods = async (_, { userId }, context) => {
 
 /**
  * Finds the payment method with the provided id.
- * @param {id} id - id of the payment method
- * @returns {object} Object with the payment method
  */
 const paymentMethod = async (_, { id }, context) => {
 	const user = await checkJwt(context);
@@ -38,8 +34,6 @@ const paymentMethod = async (_, { id }, context) => {
 
 /**
  * Creates a payment method with the provided data.
- * @param {object} data - data of the payment method
- * @returns {object} Object with the payment method created
  */
 const createPaymentMethod = async (_, { data }, context) => {
 	const user = await checkJwt(context);
@@ -49,10 +43,6 @@ const createPaymentMethod = async (_, { data }, context) => {
 
 /**
  * Updates the address with the provided id.
- * @param {object} params - id and data of the address
- * @param {string} params.id - id of the address
- * @param {object} params.data - data of the address
- * @returns {object} Object with the address updated
  */
 const updatePaymentMethod = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
@@ -62,8 +52,6 @@ const updatePaymentMethod = async (_, { id, data }, context) => {
 
 /**
  * Deletes the payment method with the provided id.
- * @param {string} id - id of the payment method
- * @returns {object} Object with the payment method deleted
  */
 const deletePaymentMethod = async (_, { id }, context) => {
 	const user = await checkJwt(context);

@@ -6,7 +6,6 @@ const service = new AddressService();
 
 /**
  * Finds all addresses in the array of objects.
- * @returns {array} Array with all addresses
  */
 const allAddresses = async (_, {}, context) => {
 	const user = await checkJwt(context);
@@ -16,8 +15,6 @@ const allAddresses = async (_, {}, context) => {
 
 /**
  * Finds all user addresses in the array of objects.
- * @param {string} userId - id of the user
- * @returns {array} Array with all addresses
  */
 const addresses = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
@@ -28,8 +25,6 @@ const addresses = async (_, { userId }, context) => {
 
 /**
  * Finds the address with the provided id.
- * @param {string} id - id of the address
- * @returns {object} Object with the address
  */
 const address = async (_, { id }, context) => {
 	const user = await checkJwt(context);
@@ -39,8 +34,6 @@ const address = async (_, { id }, context) => {
 
 /**
  * Creates a address with the provided data.
- * @param {object} data - data of the address
- * @returns {object} Object with the address created
  */
 const createAddress = async (_, { data }, context) => {
 	const user = await checkJwt(context);
@@ -50,10 +43,6 @@ const createAddress = async (_, { data }, context) => {
 
 /**
  * Updates the address with the provided id.
- * @param {object} params - id and data of the address
- * @param {string} params.id - id of the address
- * @param {object} params.data - data of the address
- * @returns {object} Object with the address updated
  */
 const updateAddress = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
@@ -63,8 +52,6 @@ const updateAddress = async (_, { id, data }, context) => {
 
 /**
  * Deletes the address with the provided id.
- * @param {string} id - id of the address
- * @returns {object} Object with the address deleted
  */
 const deleteAddress = async (_, { id }, context) => {
 	const user = await checkJwt(context);

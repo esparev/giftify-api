@@ -6,7 +6,6 @@ const service = new OrderService();
 
 /**
  * Finds all orders in the array of objects.
- * @returns {array} Array with all orders
  */
 const allOrders = async (_, {}, context) => {
 	const user = await checkJwt(context);
@@ -16,8 +15,6 @@ const allOrders = async (_, {}, context) => {
 
 /**
  * Finds all user orders in the array of objects.
- * @param {string} userId - id of the user
- * @returns {array} Array with all orders
  */
 const orders = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
@@ -28,8 +25,6 @@ const orders = async (_, { userId }, context) => {
 
 /**
  * Finds the order with the provided id.
- * @param {id} id - id of the order
- * @returns {object} Object with the order
  */
 const order = async (_, { id }, context) => {
 	const user = await checkJwt(context);
@@ -39,8 +34,6 @@ const order = async (_, { id }, context) => {
 
 /**
  * Creates a gift with the provided data.
- * @param {object} data - data of the gift
- * @returns {object} Object with the gift created
  */
 const createOrder = async (_, { data }, context) => {
 	const user = await checkJwt(context);
@@ -50,10 +43,6 @@ const createOrder = async (_, { data }, context) => {
 
 /**
  * Updates the order with the provided id.
- * @param {object} params - id and data of the order
- * @param {string} params.id - id of the order
- * @param {object} params.data - data of the order
- * @returns {object} Object with the order updated
  */
 const updateOrder = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
@@ -63,8 +52,6 @@ const updateOrder = async (_, { id, data }, context) => {
 
 /**
  * Deletes the order with the provided id.
- * @param {string} id - id of the order
- * @returns {object} Object with the order deleted
  */
 const deleteOrder = async (_, { id }, context) => {
 	const user = await checkJwt(context);

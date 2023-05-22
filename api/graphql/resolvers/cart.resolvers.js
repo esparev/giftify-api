@@ -6,7 +6,6 @@ const { belongsToUserById } = require('../../../utils/belongsToUser');
 
 /**
  * Finds all carts in the array of objects.
- * @returns {array} Array with all carts
  */
 const carts = async (_, {}, context) => {
 	const user = await checkJwt(context);
@@ -16,8 +15,6 @@ const carts = async (_, {}, context) => {
 
 /**
  * Finds the cart with the provided id.
- * @param {string} id - id of the cart
- * @returns {object} Object with the cart
  */
 const cart = async (_, { id }, context) => {
 	const user = await checkJwt(context);
@@ -27,8 +24,6 @@ const cart = async (_, { id }, context) => {
 
 /**
  * Finds the cart with the provided userId.
- * @param {string} userId - id of the user
- * @returns {object} Object with the cart
  */
 const userCart = async (_, { userId }, context) => {
 	const user = await checkJwt(context);
@@ -39,8 +34,6 @@ const userCart = async (_, { userId }, context) => {
 
 /**
  * Creates a cart with the provided data.
- * @param {object} data - data of the cart
- * @returns {object} Object with the cart created
  */
 const createCart = async (_, { data }, context) => {
 	const user = await checkJwt(context);
@@ -50,10 +43,6 @@ const createCart = async (_, { data }, context) => {
 
 /**
  * Updates the cart with the provided id.
- * @param {object} params - id and data of the cart
- * @param {string} params.id - id of the cart
- * @param {object} params.data - data of the cart
- * @returns {object} Object with the cart updated
  */
 const updateCart = async (_, { id, data }, context) => {
 	const user = await checkJwt(context);
@@ -63,8 +52,6 @@ const updateCart = async (_, { id, data }, context) => {
 
 /**
  * Deletes the cart with the provided id.
- * @param {string} id - id of the cart
- * @returns {object} Object with the cart deleted
  */
 const deleteCart = async (_, { id }, context) => {
 	const user = await checkJwt(context);
