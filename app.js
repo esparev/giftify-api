@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const passport = require('passport');
 const routerAuth = require('./auth');
+const routerApi = require('./api/routes');
 
 const {
 	errorHandler,
@@ -34,6 +35,7 @@ const createApp = () => {
 	});
 
 	routerAuth(app);
+	routerApi(app);
 	(async () => {
 		await useGraphQL(app);
 	})();
